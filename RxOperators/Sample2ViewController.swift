@@ -12,12 +12,49 @@ import RxCocoa
 
 class Sample2ViewController: UIViewController {
     
+    @IBOutlet weak var operatorLabel: UILabel!
+    @IBOutlet weak var descriptionTextView: UITextView!
+    
+    private let disposeBag = DisposeBag()
+    
+    var rxOperator: Operator!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        rx_sentMessage(#selector(UIViewController.viewWillAppear(_:)))
-            
+        enum operators: UInt32 {
+            case rx_sentMessage
+            case map
+            case interval
+            case of
+            case merge
+        }
         
+        let firstTrigger = Driver
+            .just(())
+        
+        let intervalTrigger = Driver<Int>
+            .interval(5.0)
+            .map { _ in }
+        
+        let mergedTrigger = Driver
+            .of(
+                firstTrigger,
+                intervalTrigger
+            )
+            .merge()
+        
+        let operatorName = mergedTrigger.asDriver()
+            .map { _ in String(operators(rawValue: arc4random_uniform(5))!) }
+        
+        operatorName
+            .drive(operatorLabel.rx_text)
+            .addDisposableTo(disposeBag)
+        
+        Driver
+            .just(rxOperator.description)
+            .drive(descriptionTextView.rx_text)
+            .addDisposableTo(disposeBag)
     }
 
     override func didReceiveMemoryWarning() {

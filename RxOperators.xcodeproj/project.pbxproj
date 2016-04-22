@@ -20,6 +20,7 @@
 		2A9083301CCA52CE0025B9CD /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A90832F1CCA52CE0025B9CD /* MenuTableViewController.swift */; };
 		2A9083321CCA54610025B9CD /* Sample1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9083311CCA54610025B9CD /* Sample1ViewController.swift */; };
 		2A9083341CCA5DA00025B9CD /* Sample2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9083331CCA5DA00025B9CD /* Sample2ViewController.swift */; };
+		2A9083381CCA70960025B9CD /* Sample3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9083371CCA70960025B9CD /* Sample3ViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,7 @@
 		2A90832F1CCA52CE0025B9CD /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
 		2A9083311CCA54610025B9CD /* Sample1ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sample1ViewController.swift; sourceTree = "<group>"; };
 		2A9083331CCA5DA00025B9CD /* Sample2ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sample2ViewController.swift; sourceTree = "<group>"; };
+		2A9083371CCA70960025B9CD /* Sample3ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sample3ViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +131,7 @@
 				2A90832F1CCA52CE0025B9CD /* MenuTableViewController.swift */,
 				2A9083311CCA54610025B9CD /* Sample1ViewController.swift */,
 				2A9083331CCA5DA00025B9CD /* Sample2ViewController.swift */,
+				2A9083371CCA70960025B9CD /* Sample3ViewController.swift */,
 				2A9082FB1CC7D38E0025B9CD /* Main.storyboard */,
 				2A9082FE1CC7D38E0025B9CD /* Assets.xcassets */,
 				2A9083001CC7D38E0025B9CD /* LaunchScreen.storyboard */,
@@ -300,6 +303,7 @@
 				2A9083341CCA5DA00025B9CD /* Sample2ViewController.swift in Sources */,
 				2A9083321CCA54610025B9CD /* Sample1ViewController.swift in Sources */,
 				2A9082F81CC7D38E0025B9CD /* AppDelegate.swift in Sources */,
+				2A9083381CCA70960025B9CD /* Sample3ViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

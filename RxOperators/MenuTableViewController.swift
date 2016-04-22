@@ -26,7 +26,8 @@ class MenuTableViewController: UITableViewController {
     private func bindTableView() {
         let operators: Driver<[Operator]> = Driver.just([
             Operator(title: "Sample 1", description: "rx_tapはUIButtonがタップされた時にVoidを流すコントロールイベントです！\n\njustは特定のObservableを排出するストリームを作ります。この場合は特定のstringを排出しています。\n\nflatMapはストリームにストリームをくっつける役割を果たします。この場合はrx_tapのVoidストリームが来た時にDriver<Srting>を合体させます。この時点でrx_tapのストリームはStringのストリームに変わります。\n\nDriverについては別記事でまとめてあるのでそちらを確認してください。http://qiita.com/yuzushioh/items/0a4483502c5c8569790a \n\nrx_textはUItextField, UITextView, UILabelのコントロールプロパティーです"),
-            Operator(title: "Sample 2", description: "intervalは与えた時間ごとにIntのObservableを排出します！この場合だと毎5秒ごとにIntのObservableが排出されています。\n\nofは様々なObjectやtypeを一つのObservbaleにします！\n\nmergeは複数のストリームから排出されたObservablesを一つのストリームにまとめます。この場合だと毎5秒ごとに排出されるVoidストリーム(intervalTrigger)と、はじめの一回だけVoidを排出するストリーム(firstTrigger)をマージして一つのストリームにしています。mergeする場合ストリームは同じタイプである必要があります。\n\nちなみにmap { _ in --- }でストリームのタイプを---の物に変えています。例(.map { _ in String(operators(rawValue: arc4random_uniform(5))!) }　Void -> String)")
+            Operator(title: "Sample 2", description: "intervalは与えた時間ごとにIntのObservableを排出します！この場合だと毎5秒ごとにIntのObservableが排出されています。\n\nofは様々なObjectやtypeを一つのObservbaleにします！\n\nmergeは複数のストリームから排出されたObservablesを一つのストリームにまとめます。この場合だと毎5秒ごとに排出されるVoidストリーム(intervalTrigger)と、はじめの一回だけVoidを排出するストリーム(firstTrigger)をマージして一つのストリームにしています。mergeする場合ストリームは同じタイプである必要があります。\n\nちなみにmap { _ in --- }でストリームのタイプを---の物に変えています。例(.map { _ in String(operators(rawValue: arc4random_uniform(5))!) }　Void -> String)"),
+            Operator(title: "Sample 3", description: "")
             ])
         
         operators.asDriver()

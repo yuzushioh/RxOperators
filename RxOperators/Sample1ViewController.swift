@@ -8,15 +8,29 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
 
 class Sample1ViewController: UIViewController {
     
     @IBOutlet weak var rxButton: UIButton!
     @IBOutlet weak var descriptionTextView: UITextView!
+    
+    var rxOperator: Operator!
+    
+    private let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let description = Driver<String>
+            .just(rxOperator.description)
+        
+        rxButton.rx_tap.asDriver()
+            .flatMap { _ in
+                return description
+            }
+            .drive(descriptionTextView.rx_text)
+            .addDisposableTo(disposeBag)
     }
 
     override func didReceiveMemoryWarning() {

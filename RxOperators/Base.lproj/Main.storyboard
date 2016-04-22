@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="XU0-vr-EOe">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -47,7 +46,7 @@
         <!--Sample1 View Controller-->
         <scene sceneID="MU1-MF-4XN">
             <objects>
-                <viewController id="nEq-uw-vd1" customClass="Sample1ViewController" customModule="RxOperators" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Sample1ViewController" id="nEq-uw-vd1" customClass="Sample1ViewController" customModule="RxOperators" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="k5g-Es-IXT"/>
                         <viewControllerLayoutGuide type="bottom" id="B4s-kH-V0C"/>
@@ -66,14 +65,15 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="ボタンをタップしてください！" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="q7m-84-mhu">
-                                <rect key="frame" x="40" y="105" width="240" height="128"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" text="ボタンをタップしてください！" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q7m-84-mhu">
+                                <rect key="frame" x="40" y="105" width="240" height="400"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="128" id="Uda-Yg-EhH"/>
+                                    <constraint firstAttribute="height" constant="400" id="Uda-Yg-EhH"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -94,7 +94,26 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8YP-xi-3Sh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1423" y="544"/>
+            <point key="canvasLocation" x="1362" y="544"/>
+        </scene>
+        <!--Sample2 View Controller-->
+        <scene sceneID="dIv-J7-r0c">
+            <objects>
+                <viewController id="Mup-HT-i1n" customClass="Sample2ViewController" customModule="RxOperators" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="MN8-1W-QRh"/>
+                        <viewControllerLayoutGuide type="bottom" id="IUt-sZ-Ize"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="JN8-g8-glU">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ebN-Gt-2nA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1362" y="1206"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="SpP-Z3-9Aq">
@@ -103,6 +122,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="hVI-D2-sfs">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="barTintColor" red="0.16078431372549018" green="0.17254901960784313" blue="0.20784313725490194" alpha="1" colorSpace="calibratedRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

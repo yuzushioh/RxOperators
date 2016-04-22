@@ -8,12 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		2A9082F81CC7D38E0025B9CD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9082F71CC7D38E0025B9CD /* AppDelegate.swift */; };
-		2A9082FA1CC7D38E0025B9CD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9082F91CC7D38E0025B9CD /* ViewController.swift */; };
 		2A9082FD1CC7D38E0025B9CD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A9082FB1CC7D38E0025B9CD /* Main.storyboard */; };
 		2A9082FF1CC7D38E0025B9CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A9082FE1CC7D38E0025B9CD /* Assets.xcassets */; };
 		2A9083021CC7D38E0025B9CD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A9083001CC7D38E0025B9CD /* LaunchScreen.storyboard */; };
 		2A90830D1CC7D38E0025B9CD /* RxOperatorsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A90830C1CC7D38E0025B9CD /* RxOperatorsTests.swift */; };
 		2A9083181CC7D38E0025B9CD /* RxOperatorsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9083171CC7D38E0025B9CD /* RxOperatorsUITests.swift */; };
+		2A9083261CCA50860025B9CD /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A9083251CCA50860025B9CD /* RxCocoa.framework */; };
+		2A9083271CCA50860025B9CD /* RxCocoa.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2A9083251CCA50860025B9CD /* RxCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		2A90832A1CCA50A40025B9CD /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A9083291CCA50A40025B9CD /* RxSwift.framework */; };
+		2A90832B1CCA50A40025B9CD /* RxSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2A9083291CCA50A40025B9CD /* RxSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		2A9083301CCA52CE0025B9CD /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A90832F1CCA52CE0025B9CD /* MenuTableViewController.swift */; };
+		2A9083321CCA54610025B9CD /* Sample1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9083311CCA54610025B9CD /* Sample1ViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,10 +38,24 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		2A9083281CCA50860025B9CD /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				2A90832B1CCA50A40025B9CD /* RxSwift.framework in Embed Frameworks */,
+				2A9083271CCA50860025B9CD /* RxCocoa.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		2A9082F41CC7D38E0025B9CD /* RxOperators.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RxOperators.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A9082F71CC7D38E0025B9CD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2A9082F91CC7D38E0025B9CD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		2A9082FC1CC7D38E0025B9CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2A9082FE1CC7D38E0025B9CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2A9083011CC7D38E0025B9CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -47,6 +66,10 @@
 		2A9083131CC7D38E0025B9CD /* RxOperatorsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RxOperatorsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A9083171CC7D38E0025B9CD /* RxOperatorsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxOperatorsUITests.swift; sourceTree = "<group>"; };
 		2A9083191CC7D38E0025B9CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2A9083251CCA50860025B9CD /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
+		2A9083291CCA50A40025B9CD /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
+		2A90832F1CCA52CE0025B9CD /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
+		2A9083311CCA54610025B9CD /* Sample1ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sample1ViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +77,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A90832A1CCA50A40025B9CD /* RxSwift.framework in Frameworks */,
+				2A9083261CCA50860025B9CD /* RxCocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				2A9082F61CC7D38E0025B9CD /* RxOperators */,
+				2A90832C1CCA50D50025B9CD /* Carthage */,
 				2A90830B1CC7D38E0025B9CD /* RxOperatorsTests */,
 				2A9083161CC7D38E0025B9CD /* RxOperatorsUITests */,
 				2A9082F51CC7D38E0025B9CD /* Products */,
@@ -98,7 +124,8 @@
 			isa = PBXGroup;
 			children = (
 				2A9082F71CC7D38E0025B9CD /* AppDelegate.swift */,
-				2A9082F91CC7D38E0025B9CD /* ViewController.swift */,
+				2A90832F1CCA52CE0025B9CD /* MenuTableViewController.swift */,
+				2A9083311CCA54610025B9CD /* Sample1ViewController.swift */,
 				2A9082FB1CC7D38E0025B9CD /* Main.storyboard */,
 				2A9082FE1CC7D38E0025B9CD /* Assets.xcassets */,
 				2A9083001CC7D38E0025B9CD /* LaunchScreen.storyboard */,
@@ -125,6 +152,15 @@
 			path = RxOperatorsUITests;
 			sourceTree = "<group>";
 		};
+		2A90832C1CCA50D50025B9CD /* Carthage */ = {
+			isa = PBXGroup;
+			children = (
+				2A9083291CCA50A40025B9CD /* RxSwift.framework */,
+				2A9083251CCA50860025B9CD /* RxCocoa.framework */,
+			);
+			name = Carthage;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -135,6 +171,7 @@
 				2A9082F01CC7D38E0025B9CD /* Sources */,
 				2A9082F11CC7D38E0025B9CD /* Frameworks */,
 				2A9082F21CC7D38E0025B9CD /* Resources */,
+				2A9083281CCA50860025B9CD /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -256,7 +293,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2A9082FA1CC7D38E0025B9CD /* ViewController.swift in Sources */,
+				2A9083301CCA52CE0025B9CD /* MenuTableViewController.swift in Sources */,
+				2A9083321CCA54610025B9CD /* Sample1ViewController.swift in Sources */,
 				2A9082F81CC7D38E0025B9CD /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -399,6 +437,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = RxOperators/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = yuzushio.RxOperators;
@@ -410,6 +452,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = RxOperators/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = yuzushio.RxOperators;
@@ -482,6 +528,7 @@
 				2A90831E1CC7D38E0025B9CD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2A90831F1CC7D38E0025B9CD /* Build configuration list for PBXNativeTarget "RxOperatorsTests" */ = {
 			isa = XCConfigurationList;
@@ -490,6 +537,7 @@
 				2A9083211CC7D38E0025B9CD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2A9083221CC7D38E0025B9CD /* Build configuration list for PBXNativeTarget "RxOperatorsUITests" */ = {
 			isa = XCConfigurationList;
@@ -498,6 +546,7 @@
 				2A9083241CC7D38E0025B9CD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

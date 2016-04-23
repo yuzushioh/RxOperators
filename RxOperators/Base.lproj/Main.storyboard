@@ -128,7 +128,7 @@
                                 <color key="textColor" red="0.81960784313725488" green="0.25490196078431371" blue="0.28235294117647058" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Jbz-Vp-isT">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Jbz-Vp-isT">
                                 <rect key="frame" x="20" y="125" width="280" height="423"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -156,6 +156,25 @@
             </objects>
             <point key="canvasLocation" x="1747" y="544"/>
         </scene>
+        <!--Sample5 View Controller-->
+        <scene sceneID="hPO-ou-haH">
+            <objects>
+                <viewController storyboardIdentifier="Sample5ViewController" id="olW-0z-zis" customClass="Sample5ViewController" customModule="RxOperators" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="oof-n5-H32"/>
+                        <viewControllerLayoutGuide type="bottom" id="P25-QT-5oM"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="6b3-Ck-Z6w">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xei-dY-XJX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2110" y="544"/>
+        </scene>
         <!--Sample2 View Controller-->
         <scene sceneID="dIv-J7-r0c">
             <objects>
@@ -177,7 +196,7 @@
                                 <color key="textColor" red="0.14509803921568626" green="0.56862745098039214" blue="0.58431372549019611" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="JZc-gf-x5D">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="JZc-gf-x5D">
                                 <rect key="frame" x="16" y="142" width="288" height="406"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -208,6 +227,106 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ebN-Gt-2nA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1362" y="1206"/>
+        </scene>
+        <!--Sample4 View Controller-->
+        <scene sceneID="Aaj-7B-hhW">
+            <objects>
+                <viewController storyboardIdentifier="Sample4ViewController" id="6ma-C2-gNC" customClass="Sample4ViewController" customModule="RxOperators" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="iGt-ca-sA0"/>
+                        <viewControllerLayoutGuide type="bottom" id="366-yE-NdV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="GVU-2e-kfy">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="ユーザーネーム" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YkR-4R-qlA">
+                                <rect key="frame" x="16" y="95" width="288" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="SHb-xw-QuI"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="パスワード" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wri-31-NCa">
+                                <rect key="frame" x="16" y="156" width="288" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="FQP-Jk-TOf"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mwD-x3-vOk">
+                                <rect key="frame" x="20" y="269" width="280" height="35"/>
+                                <color key="backgroundColor" red="0.52941176470588236" green="0.51764705882352935" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="dpB-ej-W4X"/>
+                                </constraints>
+                                <state key="normal" title="Sign Up">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="パスワードは３文字以上です" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sDj-Cz-5ZY">
+                                <rect key="frame" x="16" y="194" width="288" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="17" id="iLa-fm-lPx"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.81960784310000001" green="0.25490196079999999" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="k7q-4A-CvB">
+                                <rect key="frame" x="20" y="312" width="280" height="236"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ユーザーネームは３文字以上です" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u8K-ke-NRG">
+                                <rect key="frame" x="16" y="131" width="288" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="17" id="ggx-2G-qKi"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.81960784310000001" green="0.25490196079999999" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Wri-31-NCa" firstAttribute="top" secondItem="u8K-ke-NRG" secondAttribute="bottom" constant="8" id="1WL-EU-dKK"/>
+                            <constraint firstAttribute="trailing" secondItem="mwD-x3-vOk" secondAttribute="trailing" constant="20" id="9Oh-P7-4Bz"/>
+                            <constraint firstItem="366-yE-NdV" firstAttribute="top" secondItem="k7q-4A-CvB" secondAttribute="bottom" constant="20" id="J58-ws-nGL"/>
+                            <constraint firstItem="u8K-ke-NRG" firstAttribute="top" secondItem="YkR-4R-qlA" secondAttribute="bottom" constant="6" id="LYh-0a-8ZM"/>
+                            <constraint firstItem="k7q-4A-CvB" firstAttribute="top" secondItem="mwD-x3-vOk" secondAttribute="bottom" constant="8" id="MPY-jJ-IHq"/>
+                            <constraint firstItem="k7q-4A-CvB" firstAttribute="leading" secondItem="GVU-2e-kfy" secondAttribute="leading" constant="20" id="QEl-5K-rhU"/>
+                            <constraint firstAttribute="trailing" secondItem="k7q-4A-CvB" secondAttribute="trailing" constant="20" id="Tgt-dR-EwR"/>
+                            <constraint firstAttribute="trailing" secondItem="YkR-4R-qlA" secondAttribute="trailing" constant="16" id="b6v-kd-Ot6"/>
+                            <constraint firstAttribute="trailing" secondItem="Wri-31-NCa" secondAttribute="trailing" constant="16" id="biF-Bg-UYH"/>
+                            <constraint firstItem="YkR-4R-qlA" firstAttribute="leading" secondItem="GVU-2e-kfy" secondAttribute="leading" constant="16" id="bst-dx-Fbf"/>
+                            <constraint firstItem="sDj-Cz-5ZY" firstAttribute="top" secondItem="Wri-31-NCa" secondAttribute="bottom" constant="8" id="eVK-bG-JeK"/>
+                            <constraint firstAttribute="trailing" secondItem="sDj-Cz-5ZY" secondAttribute="trailing" constant="16" id="gxK-RT-rQq"/>
+                            <constraint firstItem="mwD-x3-vOk" firstAttribute="top" secondItem="sDj-Cz-5ZY" secondAttribute="bottom" constant="58" id="h3w-Eu-bdr"/>
+                            <constraint firstItem="YkR-4R-qlA" firstAttribute="top" secondItem="iGt-ca-sA0" secondAttribute="bottom" constant="75" id="nca-5x-4cO"/>
+                            <constraint firstItem="u8K-ke-NRG" firstAttribute="leading" secondItem="GVU-2e-kfy" secondAttribute="leading" constant="16" id="ufA-6Z-J21"/>
+                            <constraint firstItem="sDj-Cz-5ZY" firstAttribute="leading" secondItem="GVU-2e-kfy" secondAttribute="leading" constant="16" id="vhq-2T-CGN"/>
+                            <constraint firstAttribute="trailing" secondItem="u8K-ke-NRG" secondAttribute="trailing" constant="16" id="w06-PK-3qQ"/>
+                            <constraint firstItem="Wri-31-NCa" firstAttribute="leading" secondItem="GVU-2e-kfy" secondAttribute="leading" constant="16" id="yUg-Gv-kCo"/>
+                            <constraint firstItem="mwD-x3-vOk" firstAttribute="leading" secondItem="GVU-2e-kfy" secondAttribute="leading" constant="20" id="ydM-WS-7DD"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="descriptionTextView" destination="k7q-4A-CvB" id="pBy-aN-R6a"/>
+                        <outlet property="passwordTextField" destination="Wri-31-NCa" id="yIv-XS-rAQ"/>
+                        <outlet property="passwordValidationLabel" destination="sDj-Cz-5ZY" id="C2a-Pb-Dul"/>
+                        <outlet property="signUpButton" destination="mwD-x3-vOk" id="PkT-to-zDf"/>
+                        <outlet property="usernameTextField" destination="YkR-4R-qlA" id="iOZ-5g-uHg"/>
+                        <outlet property="usernameValidationLabel" destination="u8K-ke-NRG" id="oPn-tm-Zrp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xqr-DD-aP6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1747" y="1206"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="SpP-Z3-9Aq">

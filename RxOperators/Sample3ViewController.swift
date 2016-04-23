@@ -34,7 +34,7 @@ class Sample3ViewController: UIViewController {
         //ここもUIに関するところなので本来はDriverの方が向いている。
         Observable
             .of(
-                viewWillAppearTrigger,
+                Observable.never().takeUntil(viewWillAppearTrigger),
                 printText
             )
             .concat()

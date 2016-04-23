@@ -167,9 +167,34 @@
                     <view key="view" contentMode="scaleToFill" id="6b3-Ck-Z6w">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8nb-zn-hg5">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="FfO-qy-uCT">
+                                        <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FfO-qy-uCT" id="cId-vs-F2e">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="P25-QT-5oM" firstAttribute="top" secondItem="8nb-zn-hg5" secondAttribute="bottom" id="5NW-5a-9Ka"/>
+                            <constraint firstItem="8nb-zn-hg5" firstAttribute="top" secondItem="6b3-Ck-Z6w" secondAttribute="top" id="Hiy-Xd-tJx"/>
+                            <constraint firstAttribute="trailing" secondItem="8nb-zn-hg5" secondAttribute="trailing" id="QbB-7c-FVi"/>
+                            <constraint firstItem="8nb-zn-hg5" firstAttribute="leading" secondItem="6b3-Ck-Z6w" secondAttribute="leading" id="y4C-4c-Rfo"/>
+                        </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="tableView" destination="8nb-zn-hg5" id="0ke-QS-7vc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xei-dY-XJX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

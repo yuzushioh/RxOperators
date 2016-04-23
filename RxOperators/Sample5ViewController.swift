@@ -12,6 +12,8 @@ import RxCocoa
 
 class Sample5ViewController: UIViewController {
     
+    @IBOutlet weak var tableView: UITableView!
+    
     private let disposeBag = DisposeBag()
     
     var rxOperator: Operator!

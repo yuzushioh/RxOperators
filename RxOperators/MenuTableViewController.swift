@@ -29,7 +29,8 @@ class MenuTableViewController: UITableViewController {
             Operator(title: "Sample 2", description: "intervalは与えた時間ごとにIntのObservableを排出します！この場合だと毎5秒ごとにIntのObservableが排出されています。\n\nofは様々なObjectやtypeを一つのObservbaleにします！\n\nmergeは複数のストリームから排出されたObservablesを一つのストリームにまとめます。この場合だと毎5秒ごとに排出されるVoidストリーム(intervalTrigger)と、はじめの一回だけVoidを排出するストリーム(firstTrigger)をマージして一つのストリームにしています。mergeする場合ストリームは同じタイプである必要があります。\n\nちなみにmap { _ in --- }でストリームのタイプを---の物に変えています。例(.map { _ in String(operators(rawValue: arc4random_uniform(5))!) }　Void -> String)"),
             Operator(title: "Sample 3", description: "concatは複数のストリームが１つのストリームとして扱えるように複数のストリームをくっつけます。concantは１つ目のストリームがcompletedするまで二つ目以降のストリームをsubscribeするのを待ちます。この場合、何も排出しないnever()ストリームを作り、viewWillAppearTriggerがonNextされたタイミングでtakeUntil()を使いonCompltedします。そのタイミングで二つ目のストリームをsubscribeします！\n\ntakeUntil()は指定したストリームを見て、そのストリームがObservableを排出したタイミングで購読しているストリームをonCompletedします。\n\ndoOnNextはsubscribeNextと違い、後にbindTo(Drive)を使うことができます。"),
             Operator(title: "Sample 4", description: "簡単なフォームバリデーションのサンプルです。"),
-            Operator(title: "Sample 5", description: "")
+            Operator(title: "Sample 5", description: ""),
+            Operator(title: "Sample 6", description: "")
             ])
         
         operators.asDriver()

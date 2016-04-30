@@ -172,13 +172,43 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="FfO-qy-uCT">
-                                        <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="60" id="FfO-qy-uCT" customClass="Sample5TableViewCell" customModule="RxOperators" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="320" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FfO-qy-uCT" id="cId-vs-F2e">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="59.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s5g-6q-eX2">
+                                                    <rect key="frame" x="8" y="8" width="304" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="7eM-yo-NUt"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="👎🏻ライクされていません" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0DR-U9-qoL">
+                                                    <rect key="frame" x="8" y="37" width="147" height="16"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="0DR-U9-qoL" firstAttribute="leading" secondItem="cId-vs-F2e" secondAttribute="leading" constant="8" id="IHv-DO-g38"/>
+                                                <constraint firstItem="s5g-6q-eX2" firstAttribute="top" secondItem="cId-vs-F2e" secondAttribute="top" constant="8" id="Q5t-gH-bXR"/>
+                                                <constraint firstAttribute="trailing" secondItem="0DR-U9-qoL" secondAttribute="trailing" constant="165" id="TYX-yo-ecf"/>
+                                                <constraint firstItem="0DR-U9-qoL" firstAttribute="top" secondItem="s5g-6q-eX2" secondAttribute="bottom" constant="8" id="gYo-vs-ytu"/>
+                                                <constraint firstAttribute="trailing" secondItem="s5g-6q-eX2" secondAttribute="trailing" constant="8" id="jFg-KG-f0e"/>
+                                                <constraint firstAttribute="bottom" secondItem="0DR-U9-qoL" secondAttribute="bottom" constant="6.5" id="jkx-Ni-I7a"/>
+                                                <constraint firstItem="s5g-6q-eX2" firstAttribute="leading" secondItem="cId-vs-F2e" secondAttribute="leading" constant="8" id="l3l-hP-GPb"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="itemNameLabel" destination="s5g-6q-eX2" id="cfM-sH-abl"/>
+                                            <outlet property="likedLabel" destination="0DR-U9-qoL" id="DdR-F8-ylw"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>

@@ -27,6 +27,7 @@
 		2A9083451CCB46D00025B9CD /* APIKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2A9083431CCB46D00025B9CD /* APIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2A9083471CCB46DF0025B9CD /* Himotoki.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A9083461CCB46DF0025B9CD /* Himotoki.framework */; };
 		2A9083481CCB46DF0025B9CD /* Himotoki.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2A9083461CCB46DF0025B9CD /* Himotoki.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		2A90834C1CD517B20025B9CD /* Sample5TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A90834B1CD517B20025B9CD /* Sample5TableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +87,7 @@
 		2A90833C1CCB37D60025B9CD /* Sample5ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sample5ViewController.swift; sourceTree = "<group>"; };
 		2A9083431CCB46D00025B9CD /* APIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = APIKit.framework; path = Carthage/Build/iOS/APIKit.framework; sourceTree = "<group>"; };
 		2A9083461CCB46DF0025B9CD /* Himotoki.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Himotoki.framework; path = Carthage/Build/iOS/Himotoki.framework; sourceTree = "<group>"; };
+		2A90834B1CD517B20025B9CD /* Sample5TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sample5TableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -189,6 +191,7 @@
 				2A9083371CCA70960025B9CD /* Sample3ViewController.swift */,
 				2A9083391CCB282B0025B9CD /* Sample4ViewController.swift */,
 				2A90833C1CCB37D60025B9CD /* Sample5ViewController.swift */,
+				2A90834B1CD517B20025B9CD /* Sample5TableViewCell.swift */,
 			);
 			name = SampleViewControllers;
 			sourceTree = "<group>";
@@ -332,6 +335,7 @@
 				2A90833D1CCB37D60025B9CD /* Sample5ViewController.swift in Sources */,
 				2A9082F81CC7D38E0025B9CD /* AppDelegate.swift in Sources */,
 				2A9083381CCA70960025B9CD /* Sample3ViewController.swift in Sources */,
+				2A90834C1CD517B20025B9CD /* Sample5TableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

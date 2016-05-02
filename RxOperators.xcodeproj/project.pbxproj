@@ -28,6 +28,8 @@
 		2A9083471CCB46DF0025B9CD /* Himotoki.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A9083461CCB46DF0025B9CD /* Himotoki.framework */; };
 		2A9083481CCB46DF0025B9CD /* Himotoki.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2A9083461CCB46DF0025B9CD /* Himotoki.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2A90834C1CD517B20025B9CD /* Sample5TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A90834B1CD517B20025B9CD /* Sample5TableViewCell.swift */; };
+		2A90834E1CD80EC80025B9CD /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A90834D1CD80EC80025B9CD /* Result.framework */; };
+		2A90834F1CD80EC80025B9CD /* Result.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2A90834D1CD80EC80025B9CD /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +58,7 @@
 			files = (
 				2A9083451CCB46D00025B9CD /* APIKit.framework in Embed Frameworks */,
 				2A90832B1CCA50A40025B9CD /* RxSwift.framework in Embed Frameworks */,
+				2A90834F1CD80EC80025B9CD /* Result.framework in Embed Frameworks */,
 				2A9083481CCB46DF0025B9CD /* Himotoki.framework in Embed Frameworks */,
 				2A9083271CCA50860025B9CD /* RxCocoa.framework in Embed Frameworks */,
 			);
@@ -88,6 +91,7 @@
 		2A9083431CCB46D00025B9CD /* APIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = APIKit.framework; path = Carthage/Build/iOS/APIKit.framework; sourceTree = "<group>"; };
 		2A9083461CCB46DF0025B9CD /* Himotoki.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Himotoki.framework; path = Carthage/Build/iOS/Himotoki.framework; sourceTree = "<group>"; };
 		2A90834B1CD517B20025B9CD /* Sample5TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sample5TableViewCell.swift; sourceTree = "<group>"; };
+		2A90834D1CD80EC80025B9CD /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +101,7 @@
 			files = (
 				2A9083441CCB46D00025B9CD /* APIKit.framework in Frameworks */,
 				2A90832A1CCA50A40025B9CD /* RxSwift.framework in Frameworks */,
+				2A90834E1CD80EC80025B9CD /* Result.framework in Frameworks */,
 				2A9083471CCB46DF0025B9CD /* Himotoki.framework in Frameworks */,
 				2A9083261CCA50860025B9CD /* RxCocoa.framework in Frameworks */,
 			);
@@ -175,6 +180,7 @@
 		2A90832C1CCA50D50025B9CD /* Carthage */ = {
 			isa = PBXGroup;
 			children = (
+				2A90834D1CD80EC80025B9CD /* Result.framework */,
 				2A9083431CCB46D00025B9CD /* APIKit.framework */,
 				2A9083461CCB46DF0025B9CD /* Himotoki.framework */,
 				2A9083291CCA50A40025B9CD /* RxSwift.framework */,

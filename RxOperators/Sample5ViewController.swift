@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class Sample5ViewController: UIViewController {
+class Sample5ViewController: UIViewController, UITableViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -43,11 +43,19 @@ class Sample5ViewController: UIViewController {
             }
             .addDisposableTo(disposeBag)
         
+        tableView
+            .rx_setDelegate(self)
+            .addDisposableTo(disposeBag)
+        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 60
     }
 }
 

@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import RxSwift
 
 class Sample5TableViewCell: UITableViewCell {
 
     @IBOutlet weak var itemNameLabel: UILabel!
     @IBOutlet weak var likedLabel: UILabel!
+    
+    var disposeBag = DisposeBag()
     
     var item: Item! {
         didSet {

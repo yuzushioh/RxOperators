@@ -33,12 +33,13 @@ class Sample5ViewController: UIViewController {
         items
             .drive(tableView.rx_itemsWithCellIdentifier("Cell", cellType: Sample5TableViewCell.self)) { index, item, cell in
                 cell.item = item
+                cell.disposeBag = DisposeBag()
                 
                 LikeSubject.ItemDidLikeNotification
                     .subscribeNext { item in
                         print(item)
                     }
-                    .addDisposableTo(disposeBag)
+                    .addDisposableTo(cell.disposeBag)
             }
             .addDisposableTo(disposeBag)
         

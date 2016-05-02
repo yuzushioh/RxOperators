@@ -35,7 +35,10 @@ class Sample5ViewController: UIViewController {
                 cell.item = item
                 
                 LikeSubject.ItemDidLikeNotification
-                    .filter { $0.id == item.id }
+                    .subscribeNext { item in
+                        print(item)
+                    }
+                    .addDisposableTo(disposeBag)
             }
             .addDisposableTo(disposeBag)
         

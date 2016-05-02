@@ -30,6 +30,7 @@
 		2A90834C1CD517B20025B9CD /* Sample5TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A90834B1CD517B20025B9CD /* Sample5TableViewCell.swift */; };
 		2A90834E1CD80EC80025B9CD /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A90834D1CD80EC80025B9CD /* Result.framework */; };
 		2A90834F1CD80EC80025B9CD /* Result.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2A90834D1CD80EC80025B9CD /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		2A9083511CD8123C0025B9CD /* Sample5DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9083501CD8123C0025B9CD /* Sample5DetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +93,7 @@
 		2A9083461CCB46DF0025B9CD /* Himotoki.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Himotoki.framework; path = Carthage/Build/iOS/Himotoki.framework; sourceTree = "<group>"; };
 		2A90834B1CD517B20025B9CD /* Sample5TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sample5TableViewCell.swift; sourceTree = "<group>"; };
 		2A90834D1CD80EC80025B9CD /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
+		2A9083501CD8123C0025B9CD /* Sample5DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sample5DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,6 +200,7 @@
 				2A9083391CCB282B0025B9CD /* Sample4ViewController.swift */,
 				2A90833C1CCB37D60025B9CD /* Sample5ViewController.swift */,
 				2A90834B1CD517B20025B9CD /* Sample5TableViewCell.swift */,
+				2A9083501CD8123C0025B9CD /* Sample5DetailViewController.swift */,
 			);
 			name = SampleViewControllers;
 			sourceTree = "<group>";
@@ -336,6 +339,7 @@
 			files = (
 				2A9083301CCA52CE0025B9CD /* MenuTableViewController.swift in Sources */,
 				2A90833A1CCB282B0025B9CD /* Sample4ViewController.swift in Sources */,
+				2A9083511CD8123C0025B9CD /* Sample5DetailViewController.swift in Sources */,
 				2A9083341CCA5DA00025B9CD /* Sample2ViewController.swift in Sources */,
 				2A9083321CCA54610025B9CD /* Sample1ViewController.swift in Sources */,
 				2A90833D1CCB37D60025B9CD /* Sample5ViewController.swift in Sources */,

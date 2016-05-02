@@ -47,6 +47,16 @@ class Sample5ViewController: UIViewController, UITableViewDelegate {
             .rx_setDelegate(self)
             .addDisposableTo(disposeBag)
         
+        tableView
+            .rx_modelSelected(Item)
+            .subscribeNext { [weak self] item in
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let vc = storyboard.instantiateViewControllerWithIdentifier("Sample5DetailViewController") as! Sample5DetailViewController
+                vc.item = item
+                self?.navigationController?.pushViewController(vc, animated: true)
+            }
+            .addDisposableTo(disposeBag)
+        
     }
 
     override func didReceiveMemoryWarning() {

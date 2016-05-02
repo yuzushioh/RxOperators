@@ -230,6 +230,51 @@
             </objects>
             <point key="canvasLocation" x="2110" y="544"/>
         </scene>
+        <!--Sample5 Detail View Controller-->
+        <scene sceneID="W8t-dJ-MEg">
+            <objects>
+                <viewController storyboardIdentifier="Sample5DetailViewController" id="xFx-4L-u98" customClass="Sample5DetailViewController" customModule="RxOperators" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="utX-k5-xCM"/>
+                        <viewControllerLayoutGuide type="bottom" id="pzm-IR-phx"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="qBv-iB-1RU">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RRA-Xj-uDT">
+                                <rect key="frame" x="16" y="36" width="288" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="Y7K-We-EX2"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QTF-eD-7tC">
+                                <rect key="frame" x="16" y="65" width="288" height="30"/>
+                                <color key="backgroundColor" red="0.81960784310000001" green="0.25490196079999999" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="RRA-Xj-uDT" firstAttribute="top" secondItem="utX-k5-xCM" secondAttribute="bottom" constant="16" id="DEG-d9-ybZ"/>
+                            <constraint firstItem="QTF-eD-7tC" firstAttribute="leading" secondItem="qBv-iB-1RU" secondAttribute="leading" constant="16" id="M14-09-NMz"/>
+                            <constraint firstItem="QTF-eD-7tC" firstAttribute="top" secondItem="RRA-Xj-uDT" secondAttribute="bottom" constant="8" id="SmS-31-n2S"/>
+                            <constraint firstItem="RRA-Xj-uDT" firstAttribute="trailing" secondItem="qBv-iB-1RU" secondAttribute="trailingMargin" id="W51-qe-PdA"/>
+                            <constraint firstItem="RRA-Xj-uDT" firstAttribute="leading" secondItem="qBv-iB-1RU" secondAttribute="leadingMargin" id="hqn-iR-Ca8"/>
+                            <constraint firstAttribute="trailing" secondItem="QTF-eD-7tC" secondAttribute="trailing" constant="16" id="rBo-CE-AQB"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OwK-qs-Z1u" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2453" y="544"/>
+        </scene>
         <!--Sample2 View Controller-->
         <scene sceneID="dIv-J7-r0c">
             <objects>

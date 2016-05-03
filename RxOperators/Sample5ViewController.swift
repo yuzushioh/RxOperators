@@ -36,8 +36,9 @@ class Sample5ViewController: UIViewController, UITableViewDelegate {
                 cell.disposeBag = DisposeBag()
                 
                 LikeSubject.ItemDidLikeNotification
-                    .subscribeNext { item in
-                        print(item)
+                    .filter { $0.id == item.id }
+                    .subscribeNext { [weak cell] item in
+                        cell?.item = item
                     }
                     .addDisposableTo(cell.disposeBag)
             }
@@ -76,5 +77,5 @@ final class LikeSubject {
 struct Item {
     let id: Int
     let name: String
-    let isLiked: Bool
+    var isLiked: Bool
 }

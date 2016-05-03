@@ -270,6 +270,10 @@
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="likeButton" destination="QTF-eD-7tC" id="WHC-vF-sKY"/>
+                        <outlet property="nameLabel" destination="RRA-Xj-uDT" id="UZa-2w-8Lg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OwK-qs-Z1u" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

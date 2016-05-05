@@ -32,15 +32,12 @@ class Sample5DetailViewController: UIViewController {
         let buttonTapped = likeButton.rx_tap.asDriver()
             
         buttonTapped
-            .driveNext { [weak self] _ in
-                guard let item = self?.item else { return }
-                
-                var updatedItem = item
-                if item.isLiked {
-                    updatedItem.isLiked = false
-                } else {
-                    updatedItem.isLiked = true
-                }
+            .map { [unowned self] _ -> Item in
+                var item = self.item
+                item.isLiked = item.isLiked ? false : true
+                return item
+            }
+            .driveNext { updatedItem in
                 
                 LikeSubject.ItemDidLikeNotification
                     .onNext(updatedItem)

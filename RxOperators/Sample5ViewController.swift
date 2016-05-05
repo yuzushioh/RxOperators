@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class Sample5ViewController: UIViewController, UITableViewDelegate {
+class Sample5ViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -64,18 +64,10 @@ class Sample5ViewController: UIViewController, UITableViewDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+}
+
+extension Sample5ViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 60
     }
-}
-
-final class LikeSubject {
-    static let ItemDidLikeNotification = PublishSubject<Item>()
-}
-
-struct Item {
-    let id: Int
-    let name: String
-    var isLiked: Bool
 }

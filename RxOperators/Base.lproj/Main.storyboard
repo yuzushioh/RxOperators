@@ -432,6 +432,37 @@
             </objects>
             <point key="canvasLocation" x="1747" y="1206"/>
         </scene>
+        <!--Sample6 View Controller-->
+        <scene sceneID="IMI-fM-cYE">
+            <objects>
+                <viewController storyboardIdentifier="Sample6ViewController" id="9OV-Rx-PMx" customClass="Sample6ViewController" customModule="RxOperators" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Iyn-1t-ylc"/>
+                        <viewControllerLayoutGuide type="bottom" id="NHc-Au-rqY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Rl6-3s-6Aa">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="88u-A3-UGe">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="NHc-Au-rqY" firstAttribute="top" secondItem="88u-A3-UGe" secondAttribute="bottom" id="0WW-3Z-IcW"/>
+                            <constraint firstItem="88u-A3-UGe" firstAttribute="top" secondItem="Rl6-3s-6Aa" secondAttribute="top" id="Bje-2n-3nR"/>
+                            <constraint firstAttribute="trailing" secondItem="88u-A3-UGe" secondAttribute="trailing" id="WzX-tX-eRH"/>
+                            <constraint firstItem="88u-A3-UGe" firstAttribute="leading" secondItem="Rl6-3s-6Aa" secondAttribute="leading" id="r5R-rm-EiE"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7hI-M0-lvn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2110" y="1206"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="SpP-Z3-9Aq">
             <objects>

@@ -14,7 +14,7 @@ class AuthService {
     let consumerSecret = ""
     let authURL = "https://api.twitter.com/oauth2/token"
     
-    static func getBearerToken(completion:(bearerToken: String) ->Void) {
+    func getBearerToken(completion:(bearerToken: String) ->Void) {
         let request = NSMutableURLRequest(URL: NSURL(string: authURL)!)
         
         request.HTTPMethod = "POST"

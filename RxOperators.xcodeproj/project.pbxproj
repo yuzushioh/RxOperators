@@ -40,6 +40,7 @@
 		2A9083621CDC87330025B9CD /* TwitterRequestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9083611CDC87330025B9CD /* TwitterRequestType.swift */; };
 		2A9083641CDDF4990025B9CD /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9083631CDDF4990025B9CD /* Tweet.swift */; };
 		2A9083661CDDF5870025B9CD /* TweetResponseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9083651CDDF5870025B9CD /* TweetResponseType.swift */; };
+		2AE7BF301CDF6E0700208811 /* TweetResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE7BF2F1CDF6E0700208811 /* TweetResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,6 +113,7 @@
 		2A9083611CDC87330025B9CD /* TwitterRequestType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterRequestType.swift; sourceTree = "<group>"; };
 		2A9083631CDDF4990025B9CD /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
 		2A9083651CDDF5870025B9CD /* TweetResponseType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetResponseType.swift; sourceTree = "<group>"; };
+		2AE7BF2F1CDF6E0700208811 /* TweetResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -250,6 +252,7 @@
 				2A9083611CDC87330025B9CD /* TwitterRequestType.swift */,
 				2A90835F1CDC86F80025B9CD /* TweetService.swift */,
 				2A9083651CDDF5870025B9CD /* TweetResponseType.swift */,
+				2AE7BF2F1CDF6E0700208811 /* TweetResponse.swift */,
 				2A9083631CDDF4990025B9CD /* Tweet.swift */,
 				2A90835C1CDC85D50025B9CD /* Session+Rx.swift */,
 			);
@@ -406,6 +409,7 @@
 				2A90834C1CD517B20025B9CD /* Sample5TableViewCell.swift in Sources */,
 				2A9083581CDC83380025B9CD /* AuthService.swift in Sources */,
 				2A9083601CDC86F80025B9CD /* TweetService.swift in Sources */,
+				2AE7BF301CDF6E0700208811 /* TweetResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

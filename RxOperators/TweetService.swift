@@ -12,7 +12,7 @@ import APIKit
 class TweetService {
     struct GetTweets: TwitterRequestType {
        
-        typealias Response = GetTweetsResponse
+        typealias Response = TweetResponse<Tweet>
         
         var path: String {
             return "statuses/home_timeline.json"
@@ -30,8 +30,4 @@ class TweetService {
             return [:]
         }
     }
-}
-
-class GetTweetsResponse {
-    
 }

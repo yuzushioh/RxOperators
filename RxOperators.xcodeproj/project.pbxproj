@@ -239,13 +239,13 @@
 		2A90835B1CDC84AC0025B9CD /* Twitter API */ = {
 			isa = PBXGroup;
 			children = (
-				2A90835E1CDC86230025B9CD /* API */,
+				2A90835E1CDC86230025B9CD /* Twitter API */,
 				2A9083591CDC84A60025B9CD /* Sample6ViewController.swift */,
 			);
 			name = "Twitter API";
 			sourceTree = "<group>";
 		};
-		2A90835E1CDC86230025B9CD /* API */ = {
+		2A90835E1CDC86230025B9CD /* Twitter API */ = {
 			isa = PBXGroup;
 			children = (
 				2A9083571CDC83380025B9CD /* AuthService.swift */,
@@ -256,7 +256,7 @@
 				2A9083631CDDF4990025B9CD /* Tweet.swift */,
 				2A90835C1CDC85D50025B9CD /* Session+Rx.swift */,
 			);
-			name = API;
+			name = "Twitter API";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

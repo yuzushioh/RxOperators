@@ -41,6 +41,7 @@
 		2A9083641CDDF4990025B9CD /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9083631CDDF4990025B9CD /* Tweet.swift */; };
 		2A9083661CDDF5870025B9CD /* TweetResponseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9083651CDDF5870025B9CD /* TweetResponseType.swift */; };
 		2AE7BF301CDF6E0700208811 /* TweetResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE7BF2F1CDF6E0700208811 /* TweetResponse.swift */; };
+		2AE7BF321CE15A9000208811 /* Qiita.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE7BF311CE15A9000208811 /* Qiita.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -114,6 +115,7 @@
 		2A9083631CDDF4990025B9CD /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
 		2A9083651CDDF5870025B9CD /* TweetResponseType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetResponseType.swift; sourceTree = "<group>"; };
 		2AE7BF2F1CDF6E0700208811 /* TweetResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetResponse.swift; sourceTree = "<group>"; };
+		2AE7BF311CE15A9000208811 /* Qiita.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Qiita.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -241,6 +243,7 @@
 			children = (
 				2A90835E1CDC86230025B9CD /* Twitter API */,
 				2A9083591CDC84A60025B9CD /* Sample6ViewController.swift */,
+				2AE7BF311CE15A9000208811 /* Qiita.swift */,
 			);
 			name = "Twitter API";
 			sourceTree = "<group>";
@@ -409,6 +412,7 @@
 				2A90834C1CD517B20025B9CD /* Sample5TableViewCell.swift in Sources */,
 				2A9083581CDC83380025B9CD /* AuthService.swift in Sources */,
 				2A9083601CDC86F80025B9CD /* TweetService.swift in Sources */,
+				2AE7BF321CE15A9000208811 /* Qiita.swift in Sources */,
 				2AE7BF301CDF6E0700208811 /* TweetResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

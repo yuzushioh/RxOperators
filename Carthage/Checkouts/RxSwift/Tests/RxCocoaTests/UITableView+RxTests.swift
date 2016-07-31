@@ -24,6 +24,8 @@ class UITableViewTests : RxTest {
         ensureEventDeallocated(createView) { (view: UITableView) in view.rx_itemInserted }
         ensureEventDeallocated(createView) { (view: UITableView) in view.rx_modelSelected(Int.self) }
         ensureEventDeallocated(createView) { (view: UITableView) in view.rx_modelDeselected(Int.self) }
+        ensureEventDeallocated(createView) { (view: UITableView) in view.rx_willDisplayCell }
+        ensureEventDeallocated(createView) { (view: UITableView) in view.rx_didEndDisplayingCell }
     }
 
     func testTableView_itemSelected() {
@@ -108,6 +110,48 @@ class UITableViewTests : RxTest {
         tableView.dataSource!.tableView!(tableView, commitEditingStyle: .Insert, forRowAtIndexPath:  testRow)
 
         XCTAssertEqual(resultIndexPath, testRow)
+        subscription.dispose()
+    }
+
+    func testTableView_willDisplayCell() {
+        let tableView = UITableView(frame: CGRectMake(0, 0, 1, 1))
+
+        var resultIndexPath: NSIndexPath? = nil
+        var resultCell: UITableViewCell? = nil
+
+        let subscription = tableView.rx_willDisplayCell
+            .subscribeNext { (cell, indexPath) in
+                resultIndexPath = indexPath
+                resultCell = cell
+            }
+
+        let testRow = NSIndexPath(forRow: 1, inSection: 0)
+        let testCell = UITableViewCell()
+        tableView.delegate!.tableView!(tableView, willDisplayCell: testCell, forRowAtIndexPath: testRow)
+
+        XCTAssertEqual(resultIndexPath, testRow)
+        XCTAssertEqual(resultCell, testCell)
+        subscription.dispose()
+    }
+
+    func testTableView_didEndDisplayingCell() {
+        let tableView = UITableView(frame: CGRectMake(0, 0, 1, 1))
+
+        var resultIndexPath: NSIndexPath? = nil
+        var resultCell: UITableViewCell? = nil
+
+        let subscription = tableView.rx_didEndDisplayingCell
+            .subscribeNext { (cell, indexPath) in
+                resultIndexPath = indexPath
+                resultCell = cell
+            }
+
+        let testRow = NSIndexPath(forRow: 1, inSection: 0)
+        let testCell = UITableViewCell()
+        tableView.delegate!.tableView!(tableView, didEndDisplayingCell: testCell, forRowAtIndexPath: testRow)
+
+        XCTAssertEqual(resultIndexPath, testRow)
+        XCTAssertEqual(resultCell, testCell)
         subscription.dispose()
     }
 
@@ -317,7 +361,65 @@ class UITableViewTests : RxTest {
 }
 
 extension UITableViewTests {
-    func testItemSelected() {
+    func testDataSourceIsBeingRetainedUntilDispose() {
 
+        var dataSourceDeallocated = false
+
+        var dataSourceSubscription: Disposable!
+        autoreleasepool {
+            let items: Observable<[Int]> = Observable.just([1, 2, 3])
+            let dataSource = SectionedViewDataSourceMock()
+            let tableView = UITableView(frame: CGRectMake(0, 0, 1, 1))
+            dataSourceSubscription = items.bindTo(tableView.rx_itemsWithDataSource(dataSource))
+
+            _ = dataSource.rx_deallocated.subscribeNext { _ in
+                dataSourceDeallocated = true
+            }
+        }
+
+        XCTAssert(dataSourceDeallocated == false)
+        dataSourceSubscription.dispose()
+        XCTAssert(dataSourceDeallocated == true)
+    }
+
+    func testDataSourceIsBeingRetainedUntilTableViewDealloc() {
+
+        var dataSourceDeallocated = false
+
+        autoreleasepool {
+            let tableView = UITableView(frame: CGRectMake(0, 0, 1, 1))
+            tableView.registerClass(NSClassFromString("UITableViewCell"), forCellReuseIdentifier: "a")
+
+            let items: Observable<[Int]> = Observable.just([1, 2, 3])
+            let dataSource = SectionedViewDataSourceMock()
+            _ = items.bindTo(tableView.rx_itemsWithDataSource(dataSource))
+
+            _ = dataSource.rx_deallocated.subscribeNext { _ in
+                dataSourceDeallocated = true
+            }
+
+            XCTAssert(dataSourceDeallocated == false)
+        }
+        XCTAssert(dataSourceDeallocated == true)
+    }
+
+    func testSetDataSourceUsesWeakReference() {
+
+        var dataSourceDeallocated = false
+
+        let tableView = UITableView(frame: CGRectMake(0, 0, 1, 1))
+        tableView.registerClass(NSClassFromString("UITableViewCell"), forCellReuseIdentifier: "a")
+
+        autoreleasepool {
+            let dataSource = SectionedViewDataSourceMock()
+            tableView.rx_setDataSource(dataSource)
+
+            _ = dataSource.rx_deallocated.subscribeNext { _ in
+                dataSourceDeallocated = true
+            }
+
+            XCTAssert(dataSourceDeallocated == false)
+        }
+        XCTAssert(dataSourceDeallocated == true)
     }
 }

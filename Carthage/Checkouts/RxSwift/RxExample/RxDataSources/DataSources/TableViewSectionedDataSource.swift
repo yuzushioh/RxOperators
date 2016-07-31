@@ -25,52 +25,52 @@ public class _TableViewSectionedDataSource
         return _numberOfSectionsInTableView(tableView)
     }
 
-    func _tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func _rx_tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 0
     }
     
     public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return _tableView(tableView, numberOfRowsInSection: section)
+        return _rx_tableView(tableView, numberOfRowsInSection: section)
     }
 
-    func _tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func _rx_tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         return (nil as UITableViewCell?)!
     }
     
     public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        return _tableView(tableView, cellForRowAtIndexPath: indexPath)
+        return _rx_tableView(tableView, cellForRowAtIndexPath: indexPath)
     }
 
-    func _tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func _rx_tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return nil
     }
     
     public func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return _tableView(tableView, titleForHeaderInSection: section)
+        return _rx_tableView(tableView, titleForHeaderInSection: section)
     }
 
-    func _tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+    func _rx_tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         return nil
     }
     
     public func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return _tableView(tableView, titleForFooterInSection: section)
+        return _rx_tableView(tableView, titleForFooterInSection: section)
     }
-    
-    func _tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+
+    func _rx_tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return false
     }
     
     public func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return _tableView(tableView, canEditRowAtIndexPath: indexPath)
+        return _rx_tableView(tableView, canEditRowAtIndexPath: indexPath)
     }
     
-    func _tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    func _rx_tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return false
     }
     
     public func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return _tableView(tableView, canMoveRowAtIndexPath: indexPath)
+        return _rx_tableView(tableView, canMoveRowAtIndexPath: indexPath)
     }
     
     func _sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
@@ -81,14 +81,21 @@ public class _TableViewSectionedDataSource
         return _sectionIndexTitlesForTableView(tableView)
     }
     
-    func _tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
+    func _rx_tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
         return 0
     }
 
     public func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
-        return _tableView(tableView, sectionForSectionIndexTitle: title, atIndex: index)
+        return _rx_tableView(tableView, sectionForSectionIndexTitle: title, atIndex: index)
     }
-    
+
+    func _rx_tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
+    }
+
+    public func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
+        _rx_tableView(tableView, moveRowAtIndexPath: sourceIndexPath, toIndexPath: destinationIndexPath)
+    }
+
 }
 
 public class RxTableViewSectionedDataSource<S: SectionModelType>
@@ -98,7 +105,19 @@ public class RxTableViewSectionedDataSource<S: SectionModelType>
     public typealias I = S.Item
     public typealias Section = S
     public typealias CellFactory = (RxTableViewSectionedDataSource<S>, UITableView, NSIndexPath, I) -> UITableViewCell
+
+    #if DEBUG
+    // If data source has already been bound, then mutating it
+    // afterwards isn't something desired.
+    // This simulates immutability after binding
+    var _dataSourceBound: Bool = false
+
+    private func ensureNotMutatedAfterBinding() {
+        assert(!_dataSourceBound, "Data source is already bound. Please write this line before binding call (`bindTo`, `drive`). Data source must first be completely configured, and then bound after that, otherwise there could be runtime bugs, glitches, or partial malfunctions.")
+    }
     
+    #endif
+
     // This structure exists because model can be mutable
     // In that case current state value should be preserved.
     // The state that needs to be preserved is ordering of items in section
@@ -110,15 +129,22 @@ public class RxTableViewSectionedDataSource<S: SectionModelType>
     private var _sectionModels: [SectionModelSnapshot] = []
 
     public var sectionModels: [S] {
-        return _sectionModels.map { $0.model }
+        return _sectionModels.map { Section(original: $0.model, items: $0.items) }
     }
 
     public func sectionAtIndex(section: Int) -> S {
-        return self._sectionModels[section].model
+        let sectionModel = _sectionModels[section]
+        return Section(original: sectionModel.model, items: sectionModel.items)
     }
 
     public func itemAtIndexPath(indexPath: NSIndexPath) -> I {
         return self._sectionModels[indexPath.section].items[indexPath.item]
+    }
+
+    public func setItem(item item: I, indexPath: NSIndexPath) {
+        var section = self._sectionModels[indexPath.section]
+        section.items[indexPath.item] = item
+        self._sectionModels[indexPath.section] = section
     }
 
     public func modelAtIndexPath(indexPath: NSIndexPath) throws -> Any {
@@ -129,19 +155,59 @@ public class RxTableViewSectionedDataSource<S: SectionModelType>
         self._sectionModels = sections.map { SectionModelSnapshot(model: $0, items: $0.items) }
     }
 
+    public var configureCell: CellFactory! = nil {
+        didSet {
+            #if DEBUG
+            ensureNotMutatedAfterBinding()
+            #endif
+        }
+    }
+    
+    public var titleForHeaderInSection: ((RxTableViewSectionedDataSource<S>, section: Int) -> String?)? {
+        didSet {
+            #if DEBUG
+            ensureNotMutatedAfterBinding()
+            #endif
+        }
+    }
+    public var titleForFooterInSection: ((RxTableViewSectionedDataSource<S>, section: Int) -> String?)? {
+        didSet {
+            #if DEBUG
+            ensureNotMutatedAfterBinding()
+            #endif
+        }
+    }
+    
+    public var canEditRowAtIndexPath: ((RxTableViewSectionedDataSource<S>, indexPath: NSIndexPath) -> Bool)? {
+        didSet {
+            #if DEBUG
+            ensureNotMutatedAfterBinding()
+            #endif
+        }
+    }
 
-    public var configureCell: CellFactory! = nil
-    
-    public var titleForHeaderInSection: ((RxTableViewSectionedDataSource<S>, section: Int) -> String?)?
-    public var titleForFooterInSection: ((RxTableViewSectionedDataSource<S>, section: Int) -> String?)?
-    
-    public var canEditRowAtIndexPath: ((RxTableViewSectionedDataSource<S>, indexPath: NSIndexPath) -> Bool)?
-    public var canMoveRowAtIndexPath: ((RxTableViewSectionedDataSource<S>, indexPath: NSIndexPath) -> Bool)?
-    
-    public var sectionIndexTitles: ((RxTableViewSectionedDataSource<S>) -> [String]?)?
-    public var sectionForSectionIndexTitle:((RxTableViewSectionedDataSource<S>, title: String, index: Int) -> Int)?
-    
-    public var rowAnimation: UITableViewRowAnimation = .Automatic
+    public var canMoveRowAtIndexPath: ((RxTableViewSectionedDataSource<S>, indexPath: NSIndexPath) -> Bool)? {
+        didSet {
+            #if DEBUG
+            ensureNotMutatedAfterBinding()
+            #endif
+        }
+    }
+
+    public var sectionIndexTitles: ((RxTableViewSectionedDataSource<S>) -> [String]?)? {
+        didSet {
+            #if DEBUG
+            ensureNotMutatedAfterBinding()
+            #endif
+        }
+    }
+    public var sectionForSectionIndexTitle:((RxTableViewSectionedDataSource<S>, title: String, index: Int) -> Int)? {
+        didSet {
+            #if DEBUG
+            ensureNotMutatedAfterBinding()
+            #endif
+        }
+    }
     
     public override init() {
         super.init()
@@ -160,38 +226,42 @@ public class RxTableViewSectionedDataSource<S: SectionModelType>
         return _sectionModels.count
     }
     
-    override func _tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func _rx_tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return _sectionModels[section].items.count
     }
     
-    override func _tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func _rx_tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         precondition(indexPath.item < _sectionModels[indexPath.section].items.count)
         
         return configureCell(self, tableView, indexPath, itemAtIndexPath(indexPath))
     }
     
-    override func _tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func _rx_tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return titleForHeaderInSection?(self, section: section)
     }
     
-    override func _tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+    override func _rx_tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         return titleForFooterInSection?(self, section: section)
     }
     
-    override func _tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    override func _rx_tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         guard let canEditRow = canEditRowAtIndexPath?(self, indexPath: indexPath) else {
-            return super._tableView(tableView, canMoveRowAtIndexPath: indexPath)
+            return super._rx_tableView(tableView, canEditRowAtIndexPath: indexPath)
         }
         
         return canEditRow
     }
    
-    override func _tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    override func _rx_tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         guard let canMoveRow = canMoveRowAtIndexPath?(self, indexPath: indexPath) else {
-            return super._tableView(tableView, canMoveRowAtIndexPath: indexPath)
+            return super._rx_tableView(tableView, canMoveRowAtIndexPath: indexPath)
         }
         
         return canMoveRow
+    }
+
+    override func _rx_tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
+        self._sectionModels.moveFromSourceIndexPath(sourceIndexPath, destinationIndexPath: destinationIndexPath)
     }
     
     override func _sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
@@ -202,9 +272,9 @@ public class RxTableViewSectionedDataSource<S: SectionModelType>
         return titles
     }
     
-    override func _tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
-        guard let section  = sectionForSectionIndexTitle?(self, title: title, index: index) else {
-            return super._tableView(tableView, sectionForSectionIndexTitle: title, atIndex: index)
+    override func _rx_tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
+        guard let section = sectionForSectionIndexTitle?(self, title: title, index: index) else {
+            return super._rx_tableView(tableView, sectionForSectionIndexTitle: title, atIndex: index)
         }
         
         return section

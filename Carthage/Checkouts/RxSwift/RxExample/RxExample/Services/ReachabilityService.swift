@@ -9,34 +9,65 @@
 #if !RX_NO_MODULE
 import RxSwift
 #endif
+import Foundation
 
 public enum ReachabilityStatus {
-    case Reachable, Unreachable
+    case Reachable(viaWiFi: Bool)
+    case Unreachable
 }
 
-class ReachabilityService {
+extension ReachabilityStatus {
+    var reachable: Bool {
+        switch self {
+        case .Reachable:
+            return true
+        case .Unreachable:
+            return false
+        }
+    }
+}
 
-    private let reachabilityRef = try! Reachability.reachabilityForInternetConnection()
+protocol ReachabilityService {
+    var reachability: Observable<ReachabilityStatus> { get }
+}
 
-    private let _reachabilityChangedSubject = PublishSubject<ReachabilityStatus>()
-    private var reachabilityChanged: Observable<ReachabilityStatus> {
-        return _reachabilityChangedSubject.asObservable()
+class DefaultReachabilityService
+    : ReachabilityService {
+
+    private let _reachabilitySubject: BehaviorSubject<ReachabilityStatus>
+
+    var reachability: Observable<ReachabilityStatus> {
+        return _reachabilitySubject.asObservable()
     }
 
-    // singleton
-    static let sharedReachabilityService = ReachabilityService()
+    let _reachability: Reachability
 
-    init(){
+    init() throws {
+        let reachabilityRef = try Reachability.reachabilityForInternetConnection()
+        let reachabilitySubject = BehaviorSubject<ReachabilityStatus>(value: .Unreachable)
+
+        // so main thread isn't blocked when reachability via WiFi is checked
+        let backgroundQueue = dispatch_queue_create("reachability.wificheck", DISPATCH_QUEUE_SERIAL)
+
         reachabilityRef.whenReachable = { reachability in
-            self._reachabilityChangedSubject.on(.Next(.Reachable))
+            dispatch_async(backgroundQueue) {
+                reachabilitySubject.on(.Next(.Reachable(viaWiFi: reachabilityRef.isReachableViaWiFi())))
+            }
         }
 
         reachabilityRef.whenUnreachable = { reachability in
-            self._reachabilityChangedSubject.on(.Next(.Unreachable))
+            dispatch_async(backgroundQueue) {
+                reachabilitySubject.on(.Next(.Unreachable))
+            }
         }
 
-        try! reachabilityRef.startNotifier()
+        try reachabilityRef.startNotifier()
+        _reachability = reachabilityRef
+        _reachabilitySubject = reachabilitySubject
+    }
 
+    deinit {
+        _reachability.stopNotifier()
     }
 }
 
@@ -44,8 +75,8 @@ extension ObservableConvertibleType {
     func retryOnBecomesReachable(valueOnFailure:E, reachabilityService: ReachabilityService) -> Observable<E> {
         return self.asObservable()
             .catchError { (e) -> Observable<E> in
-                reachabilityService.reachabilityChanged
-                    .filter { $0 == .Reachable }
+                reachabilityService.reachability
+                    .filter { $0.reachable }
                     .flatMap { _ in Observable.error(e) }
                     .startWith(valueOnFailure)
             }

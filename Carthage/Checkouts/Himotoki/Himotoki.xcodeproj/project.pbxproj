@@ -60,6 +60,10 @@
 		CDDDEE181BFC71500058595B /* NSNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDDEE161BFC71500058595B /* NSNumber.swift */; };
 		CDDDEE191BFC71500058595B /* NSNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDDEE161BFC71500058595B /* NSNumber.swift */; };
 		CDDDEE1A1BFC71500058595B /* NSNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDDEE161BFC71500058595B /* NSNumber.swift */; };
+		CDDFC2671D183D3900E119B0 /* Casting.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDFC2661D183D3900E119B0 /* Casting.swift */; };
+		CDDFC2681D183D3900E119B0 /* Casting.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDFC2661D183D3900E119B0 /* Casting.swift */; };
+		CDDFC2691D183D3900E119B0 /* Casting.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDFC2661D183D3900E119B0 /* Casting.swift */; };
+		CDDFC26A1D183D3900E119B0 /* Casting.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDFC2661D183D3900E119B0 /* Casting.swift */; };
 		CDE4238F1BF2E9B000C9473F /* KeyPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6DA5E01B215B7C008B3EC5 /* KeyPath.swift */; };
 		CDE423901BF2E9B000C9473F /* Extractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD929A551AF4A4C9002F5C53 /* Extractor.swift */; };
 		CDE423911BF2E9B000C9473F /* decode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC4E7861B0ACB42007F8F88 /* decode.swift */; };
@@ -151,6 +155,7 @@
 		CDD3962A1C0C0CD000A3A3DD /* NestedObjectParsingTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NestedObjectParsingTest.swift; sourceTree = "<group>"; };
 		CDDDEE101BFC70B00058595B /* StandardLib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StandardLib.swift; sourceTree = "<group>"; };
 		CDDDEE161BFC71500058595B /* NSNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSNumber.swift; sourceTree = "<group>"; };
+		CDDFC2661D183D3900E119B0 /* Casting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Casting.swift; sourceTree = "<group>"; };
 		CDE4239E1BF2E9B000C9473F /* Himotoki.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Himotoki.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDE423A11BF2EA0A00C9473F /* tvOS-Application.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "tvOS-Application.xcconfig"; sourceTree = "<group>"; };
 		CDE423A21BF2EA0A00C9473F /* tvOS-Base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "tvOS-Base.xcconfig"; sourceTree = "<group>"; };
@@ -365,6 +370,7 @@
 			isa = PBXGroup;
 			children = (
 				CD9ADBF81B00F8F600406AA5 /* Builder.swift */,
+				CDDFC2661D183D3900E119B0 /* Casting.swift */,
 				CD929A531AF4A488002F5C53 /* Decodable.swift */,
 				CDC4E7861B0ACB42007F8F88 /* decode.swift */,
 				CD8620E21B914C60006DCCDC /* DecodeError.swift */,
@@ -565,20 +571,35 @@
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Syo Ikeda";
 				TargetAttributes = {
+					CD8F0DC61B6D014B0021196A = {
+						LastSwiftMigration = 0800;
+						ProvisioningStyle = Manual;
+					};
 					CD929A361AF4A2C3002F5C53 = {
 						CreatedOnToolsVersion = 6.3;
+						LastSwiftMigration = 0800;
+						ProvisioningStyle = Manual;
 					};
 					CD929A411AF4A2C3002F5C53 = {
 						CreatedOnToolsVersion = 6.3;
+						LastSwiftMigration = 0800;
+					};
+					CDE4238D1BF2E9B000C9473F = {
+						LastSwiftMigration = 0800;
+						ProvisioningStyle = Manual;
 					};
 					CDE423A81BF2ECA700C9473F = {
 						CreatedOnToolsVersion = 7.1.1;
+						LastSwiftMigration = 0800;
 					};
 					CDF03E321AF606F60041C3AA = {
 						CreatedOnToolsVersion = 6.3;
+						LastSwiftMigration = 0800;
+						ProvisioningStyle = Manual;
 					};
 					CDF03E3C1AF606F60041C3AA = {
 						CreatedOnToolsVersion = 6.3;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -671,6 +692,7 @@
 				CD8F0DCB1B6D014B0021196A /* Decodable.swift in Sources */,
 				CD8F0DCC1B6D014B0021196A /* Builder.swift in Sources */,
 				CD8F0DCD1B6D014B0021196A /* Operators.swift in Sources */,
+				CDDFC2691D183D3900E119B0 /* Casting.swift in Sources */,
 				CD8620E51B914C60006DCCDC /* DecodeError.swift in Sources */,
 				CD7450201BB7FC7B0092EED3 /* RawRepresentable.swift in Sources */,
 			);
@@ -689,6 +711,7 @@
 				CD929A541AF4A488002F5C53 /* Decodable.swift in Sources */,
 				CD9ADBF91B00F8F600406AA5 /* Builder.swift in Sources */,
 				CD181ED91AF4F7C20065963F /* Operators.swift in Sources */,
+				CDDFC2671D183D3900E119B0 /* Casting.swift in Sources */,
 				CD8620E31B914C60006DCCDC /* DecodeError.swift in Sources */,
 				CD74501E1BB7FC7B0092EED3 /* RawRepresentable.swift in Sources */,
 			);
@@ -721,6 +744,7 @@
 				CDE423921BF2E9B000C9473F /* Decodable.swift in Sources */,
 				CDE423931BF2E9B000C9473F /* Builder.swift in Sources */,
 				CDE423941BF2E9B000C9473F /* Operators.swift in Sources */,
+				CDDFC26A1D183D3900E119B0 /* Casting.swift in Sources */,
 				CDE423951BF2E9B000C9473F /* DecodeError.swift in Sources */,
 				CDE423961BF2E9B000C9473F /* RawRepresentable.swift in Sources */,
 			);
@@ -753,6 +777,7 @@
 				CDF03E4C1AF607540041C3AA /* Decodable.swift in Sources */,
 				CD9ADBFA1B00F8F600406AA5 /* Builder.swift in Sources */,
 				CDF03E4E1AF607650041C3AA /* Operators.swift in Sources */,
+				CDDFC2681D183D3900E119B0 /* Casting.swift in Sources */,
 				CD8620E41B914C60006DCCDC /* DecodeError.swift in Sources */,
 				CD74501F1BB7FC7B0092EED3 /* RawRepresentable.swift in Sources */,
 			);
@@ -817,6 +842,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CD748AE01B4440CB00632C3F /* Debug.xcconfig */;
 			buildSettings = {
+				CODE_SIGNING_REQUIRED = NO;
+				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -826,6 +853,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ikesyo.$(PRODUCT_NAME:rfc1034identifier)";
+				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -838,6 +866,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CD748AE21B4440CB00632C3F /* Release.xcconfig */;
 			buildSettings = {
+				CODE_SIGNING_REQUIRED = NO;
+				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
@@ -845,6 +875,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ikesyo.$(PRODUCT_NAME:rfc1034identifier)";
+				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -857,7 +888,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CD748AEB1B4440CB00632C3F /* iOS-Framework.xcconfig */;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				INFOPLIST_FILE = Sources/Info.plist;
@@ -869,7 +899,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CD748AEB1B4440CB00632C3F /* iOS-Framework.xcconfig */;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				INFOPLIST_FILE = Sources/Info.plist;

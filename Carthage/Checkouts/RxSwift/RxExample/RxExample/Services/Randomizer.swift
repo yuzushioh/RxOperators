@@ -74,7 +74,7 @@ class Randomizer {
             if rng.get_random() % 2 == 0 {
                 let itemIndex = rng.get_random() % (itemCount + 1)
                 if insertItems {
-                    sections[sectionIndex].items.insert(IdentifiableValue(value: unusedValue), atIndex: itemIndex)
+                    sections[sectionIndex].items.insert(unusedValue, atIndex: itemIndex)
                 }
                 else {
                     nextUnusedItems.append(unusedValue)
@@ -83,14 +83,14 @@ class Randomizer {
             // update
             else {
                 if itemCount == 0 {
-                    sections[sectionIndex].items.insert(IdentifiableValue(value: unusedValue), atIndex: 0)
+                    sections[sectionIndex].items.insert(unusedValue, atIndex: 0)
                     continue
                 }
                 
                 let itemIndex = rng.get_random() % itemCount
                 if reloadItems {
-                    nextUnusedItems.append(sections[sectionIndex].items.removeAtIndex(itemIndex).value)
-                    sections[sectionIndex].items.insert(IdentifiableValue(value: unusedValue), atIndex: itemIndex)
+                    nextUnusedItems.append(sections[sectionIndex].items.removeAtIndex(itemIndex))
+                    sections[sectionIndex].items.insert(unusedValue, atIndex: itemIndex)
                     
                 }
                 else {
@@ -151,7 +151,7 @@ class Randomizer {
             let sourceItemIndex = rng.get_random() % sectionItemCount
             
             if deleteItems {
-                nextUnusedItems.append(sections[sourceSectionIndex].items.removeAtIndex(sourceItemIndex).value)
+                nextUnusedItems.append(sections[sourceSectionIndex].items.removeAtIndex(sourceItemIndex))
             }
         }
 
@@ -188,7 +188,7 @@ class Randomizer {
                 let section = sections.removeAtIndex(sectionIndex)
                 
                 for item in section.items {
-                    nextUnusedItems.append(item.value)
+                    nextUnusedItems.append(item)
                 }
 
                 nextUnusedSections.append(section.model)

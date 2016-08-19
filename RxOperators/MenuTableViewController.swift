@@ -57,15 +57,15 @@ class MenuTableViewController: UITableViewController {
                 case 2:
                     let vc = storyboard.instantiateViewControllerWithIdentifier("Sample3ViewController") as! Sample3ViewController
                     vc.rxOperator = rxOperator
-                    self?.navigationController?.pushViewController(vc, animated: true)
+                    self?.pushToViewController(vc)
                 case 3:
                     let vc = storyboard.instantiateViewControllerWithIdentifier("Sample4ViewController") as! Sample4ViewController
                     vc.rxOperator = rxOperator
-                    self?.navigationController?.pushViewController(vc, animated: true)
+                    self?.pushToViewController(vc)
                 case 4:
                     let vc = storyboard.instantiateViewControllerWithIdentifier("Sample5ViewController") as! Sample5ViewController
                     vc.rxOperator = rxOperator
-                    self?.navigationController?.pushViewController(vc, animated: true)
+                    self?.pushToViewController(vc)
                 default:
                     break
                 }

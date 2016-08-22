@@ -33,7 +33,6 @@
 		2A9083511CD8123C0025B9CD /* Sample5DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9083501CD8123C0025B9CD /* Sample5DetailViewController.swift */; };
 		2A9083541CDB47730025B9CD /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9083531CDB47730025B9CD /* Item.swift */; };
 		2A9083561CDB47840025B9CD /* LikeSubject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9083551CDB47840025B9CD /* LikeSubject.swift */; };
-		2A90835A1CDC84A60025B9CD /* Sample6ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9083591CDC84A60025B9CD /* Sample6ViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,7 +98,6 @@
 		2A9083501CD8123C0025B9CD /* Sample5DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sample5DetailViewController.swift; sourceTree = "<group>"; };
 		2A9083531CDB47730025B9CD /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		2A9083551CDB47840025B9CD /* LikeSubject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeSubject.swift; sourceTree = "<group>"; };
-		2A9083591CDC84A60025B9CD /* Sample6ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sample6ViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -205,7 +203,6 @@
 				2A9083331CCA5DA00025B9CD /* Sample2ViewController.swift */,
 				2A9083371CCA70960025B9CD /* Sample3ViewController.swift */,
 				2A9083391CCB282B0025B9CD /* Sample4ViewController.swift */,
-				2A9083591CDC84A60025B9CD /* Sample6ViewController.swift */,
 			);
 			name = SampleViewControllers;
 			sourceTree = "<group>";
@@ -361,7 +358,6 @@
 				2A9083341CCA5DA00025B9CD /* Sample2ViewController.swift in Sources */,
 				2A9083321CCA54610025B9CD /* Sample1ViewController.swift in Sources */,
 				2A90833D1CCB37D60025B9CD /* Sample5ViewController.swift in Sources */,
-				2A90835A1CDC84A60025B9CD /* Sample6ViewController.swift in Sources */,
 				2A9082F81CC7D38E0025B9CD /* AppDelegate.swift in Sources */,
 				2A9083381CCA70960025B9CD /* Sample3ViewController.swift in Sources */,
 				2A9083561CDB47840025B9CD /* LikeSubject.swift in Sources */,

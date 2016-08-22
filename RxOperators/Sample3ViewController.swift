@@ -39,9 +39,6 @@ class Sample3ViewController: UIViewController {
             )
             .concat()
             .map { _ in "concat発動" }
-            .doOnNext { text in
-                print(text)
-            }
             .bindTo(textLabel.rx_text)
             .addDisposableTo(disposeBag)
         
@@ -49,10 +46,5 @@ class Sample3ViewController: UIViewController {
             .just(rxOperator.description)
             .drive(descriptionTextView.rx_text)
             .addDisposableTo(disposeBag)
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 }

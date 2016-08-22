@@ -26,14 +26,8 @@ class Sample1ViewController: UIViewController {
             .just(rxOperator.description)
         
         rxButton.rx_tap.asDriver()
-            .flatMap { _ in
-                return description
-            }
+            .withLatestFrom(description)
             .drive(descriptionTextView.rx_text)
             .addDisposableTo(disposeBag)
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
     }
 }

@@ -37,11 +37,7 @@ class Sample5DetailViewController: UIViewController {
                 item.isLiked = item.isLiked ? false : true
                 return item
             }
-            .driveNext { updatedItem in
-                
-                LikeSubject.ItemDidLikeNotification
-                    .onNext(updatedItem)
-            }
+            .drive(LikeSubject.ItemDidLikeNotification)
             .addDisposableTo(disposeBag)
         
         buttonTapped
@@ -54,10 +50,5 @@ class Sample5DetailViewController: UIViewController {
                 }
             }
             .addDisposableTo(disposeBag)
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 }

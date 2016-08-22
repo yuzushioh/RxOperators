@@ -59,11 +59,6 @@ class Sample5ViewController: UIViewController {
             .addDisposableTo(disposeBag)
         
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 }
 
 extension Sample5ViewController: UITableViewDelegate {

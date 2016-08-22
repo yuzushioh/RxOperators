@@ -72,9 +72,4 @@ class Sample4ViewController: UIViewController {
             .drive(descriptionTextView.rx_text)
             .addDisposableTo(disposeBag)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 }

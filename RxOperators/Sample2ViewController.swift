@@ -44,7 +44,7 @@ class Sample2ViewController: UIViewController {
             )
             .merge()
         
-        let operatorName = mergedTrigger.asDriver()
+        let operatorName = mergedTrigger
             .map { _ in String(operators(rawValue: arc4random_uniform(5))!) }
         
         operatorName
@@ -55,10 +55,5 @@ class Sample2ViewController: UIViewController {
             .just(rxOperator.description)
             .drive(descriptionTextView.rx_text)
             .addDisposableTo(disposeBag)
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 }

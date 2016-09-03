@@ -215,9 +215,46 @@
                     <view key="view" contentMode="scaleToFill" id="7Gf-M6-zgn">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="4og-YW-kbc">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            </mapView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YXe-27-Wh3">
+                                <rect key="frame" x="0.0" y="64" width="320" height="40"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oMr-zc-yCq">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="oMr-zc-yCq" firstAttribute="leading" secondItem="YXe-27-Wh3" secondAttribute="leading" id="O28-AO-ck5"/>
+                                    <constraint firstAttribute="trailing" secondItem="oMr-zc-yCq" secondAttribute="trailing" id="TTz-ws-NHI"/>
+                                    <constraint firstItem="oMr-zc-yCq" firstAttribute="top" secondItem="YXe-27-Wh3" secondAttribute="top" id="em8-pu-tLW"/>
+                                    <constraint firstAttribute="bottom" secondItem="oMr-zc-yCq" secondAttribute="bottom" id="ggd-az-73b"/>
+                                    <constraint firstAttribute="height" constant="40" id="tFz-Am-ZgK"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="4og-YW-kbc" firstAttribute="top" secondItem="7Gf-M6-zgn" secondAttribute="top" id="1Eu-2q-9y7"/>
+                            <constraint firstItem="YXe-27-Wh3" firstAttribute="leading" secondItem="7Gf-M6-zgn" secondAttribute="leading" id="3zI-BT-EVz"/>
+                            <constraint firstAttribute="trailing" secondItem="YXe-27-Wh3" secondAttribute="trailing" id="FqJ-HS-GiL"/>
+                            <constraint firstItem="YXe-27-Wh3" firstAttribute="top" secondItem="e4H-jX-WAD" secondAttribute="bottom" id="S8U-1e-K7O"/>
+                            <constraint firstItem="4og-YW-kbc" firstAttribute="leading" secondItem="7Gf-M6-zgn" secondAttribute="leading" id="cnn-Ib-6i8"/>
+                            <constraint firstAttribute="trailing" secondItem="4og-YW-kbc" secondAttribute="trailing" id="f4O-rE-MiG"/>
+                            <constraint firstItem="kh9-lT-p47" firstAttribute="top" secondItem="4og-YW-kbc" secondAttribute="bottom" id="jkt-ka-46V"/>
+                        </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="locationLabel" destination="oMr-zc-yCq" id="Uv8-JK-7Jn"/>
+                        <outlet property="mapView" destination="4og-YW-kbc" id="mgC-hH-Hgb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FTk-Ru-Tmo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

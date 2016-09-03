@@ -9,9 +9,13 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import MapKit
 
 class LocationViewController: UIViewController {
 
+    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var locationLabel: UILabel!
+    
     private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
@@ -24,9 +28,11 @@ class LocationViewController: UIViewController {
             .addDisposableTo(disposeBag)
         
         LocationManager.instance.location
-            .subscribeNext { location in
-                print(location)
-            }
+            .bindTo(mapView.rx_updateCoordinate)
+            .addDisposableTo(disposeBag)
+        
+        LocationManager.instance.location
+            .bindTo(locationLabel.rx_locationText)
             .addDisposableTo(disposeBag)
         
         LocationManager.instance.error
@@ -34,5 +40,23 @@ class LocationViewController: UIViewController {
                 Alert.showAlert("Error", message: error.description, baseViewController: self)
             }
             .addDisposableTo(disposeBag)
+    }
+}
+
+private extension MKMapView {
+    var rx_updateCoordinate: AnyObserver<CLLocationCoordinate2D> {
+        return UIBindingObserver(UIElement: self) { mapView, coordinate in
+            let span = MKCoordinateSpanMake(0.01, 0.01)
+            mapView.region = MKCoordinateRegionMake(coordinate, span)
+            mapView.centerCoordinate = coordinate
+        }.asObserver()
+    }
+}
+
+private extension UILabel {
+    var rx_locationText: AnyObserver<CLLocationCoordinate2D> {
+        return UIBindingObserver(UIElement: self) { label, coordinate in
+            label.text = "lat: \(coordinate.latitude), lng: \(coordinate.longitude)"
+        }.asObserver()
     }
 }

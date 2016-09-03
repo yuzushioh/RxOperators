@@ -11,6 +11,8 @@
 		2A10B9301D7B12FB000F1178 /* CircledBorderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A10B92F1D7B12FB000F1178 /* CircledBorderButton.swift */; };
 		2A10B9321D7B14B9000F1178 /* SimpleValidationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A10B9311D7B14B9000F1178 /* SimpleValidationViewController.swift */; };
 		2A10B9341D7B1CDC000F1178 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A10B9331D7B1CDC000F1178 /* Alert.swift */; };
+		2A10B93B1D7B21B5000F1178 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A10B93A1D7B21B5000F1178 /* LocationManager.swift */; };
+		2A10B93D1D7B26FA000F1178 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A10B93C1D7B26FA000F1178 /* LocationViewController.swift */; };
 		2A9082F81CC7D38E0025B9CD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9082F71CC7D38E0025B9CD /* AppDelegate.swift */; };
 		2A9082FD1CC7D38E0025B9CD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A9082FB1CC7D38E0025B9CD /* Main.storyboard */; };
 		2A9082FF1CC7D38E0025B9CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A9082FE1CC7D38E0025B9CD /* Assets.xcassets */; };
@@ -69,6 +71,8 @@
 		2A10B92F1D7B12FB000F1178 /* CircledBorderButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircledBorderButton.swift; sourceTree = "<group>"; };
 		2A10B9311D7B14B9000F1178 /* SimpleValidationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleValidationViewController.swift; sourceTree = "<group>"; };
 		2A10B9331D7B1CDC000F1178 /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		2A10B93A1D7B21B5000F1178 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		2A10B93C1D7B26FA000F1178 /* LocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
 		2A9082F41CC7D38E0025B9CD /* RxOperators.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RxOperators.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A9082F71CC7D38E0025B9CD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2A9082FC1CC7D38E0025B9CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -135,6 +139,15 @@
 			name = Common;
 			sourceTree = "<group>";
 		};
+		2A10B93E1D7B2BCC000F1178 /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				2A10B93A1D7B21B5000F1178 /* LocationManager.swift */,
+				2A10B93C1D7B26FA000F1178 /* LocationViewController.swift */,
+			);
+			name = Location;
+			sourceTree = "<group>";
+		};
 		2A9082EB1CC7D38E0025B9CD = {
 			isa = PBXGroup;
 			children = (
@@ -161,6 +174,7 @@
 			children = (
 				2A9082F71CC7D38E0025B9CD /* AppDelegate.swift */,
 				2A10B92D1D7B1186000F1178 /* MainViewController.swift */,
+				2A10B93E1D7B2BCC000F1178 /* Location */,
 				2A10B9351D7B1E32000F1178 /* SimpleValidation */,
 				2A10B9361D7B1E45000F1178 /* Common */,
 				2A9082FB1CC7D38E0025B9CD /* Main.storyboard */,
@@ -333,8 +347,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A10B93D1D7B26FA000F1178 /* LocationViewController.swift in Sources */,
 				2A9082F81CC7D38E0025B9CD /* AppDelegate.swift in Sources */,
 				2A10B9301D7B12FB000F1178 /* CircledBorderButton.swift in Sources */,
+				2A10B93B1D7B21B5000F1178 /* LocationManager.swift in Sources */,
 				2A10B92E1D7B1186000F1178 /* MainViewController.swift in Sources */,
 				2A10B9341D7B1CDC000F1178 /* Alert.swift in Sources */,
 				2A10B9321D7B14B9000F1178 /* SimpleValidationViewController.swift in Sources */,

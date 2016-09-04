@@ -374,7 +374,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="0.46000000000000002" colorSpace="calibratedRGB"/>
+                                            <color key="backgroundColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="0.68000000000000005" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstItem="9PY-6p-ZEH" firstAttribute="centerY" secondItem="gs7-LU-79q" secondAttribute="centerY" id="E7v-3S-IXg"/>
                                                 <constraint firstAttribute="height" constant="30" id="Em7-ZR-hcY"/>
@@ -433,18 +433,52 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="r1O-9J-QT2">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="r1O-9J-QT2" customClass="TimelineCollectionViewCell" customModule="RxOperators" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="64" width="150" height="150"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="S8K-bW-jMd">
+                                            <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                                        </imageView>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qjL-JD-Ga3">
+                                            <rect key="frame" x="0.0" y="120" width="150" height="30"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥4567⚡️" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zo5-Mp-Pla">
+                                                    <rect key="frame" x="46" y="7" width="58" height="16"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="0.68000000000000005" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstItem="Zo5-Mp-Pla" firstAttribute="centerX" secondItem="qjL-JD-Ga3" secondAttribute="centerX" id="CMk-Kc-7LO"/>
+                                                <constraint firstAttribute="height" constant="30" id="Lp6-Fb-ape"/>
+                                                <constraint firstItem="Zo5-Mp-Pla" firstAttribute="centerY" secondItem="qjL-JD-Ga3" secondAttribute="centerY" id="fCl-XC-yIQ"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="S8K-bW-jMd" secondAttribute="trailing" id="C3L-Nx-xga"/>
+                                    <constraint firstItem="qjL-JD-Ga3" firstAttribute="leading" secondItem="r1O-9J-QT2" secondAttribute="leading" id="JEW-tF-V7N"/>
+                                    <constraint firstAttribute="bottom" secondItem="S8K-bW-jMd" secondAttribute="bottom" id="XOx-rI-WhT"/>
+                                    <constraint firstItem="S8K-bW-jMd" firstAttribute="leading" secondItem="r1O-9J-QT2" secondAttribute="leading" id="eYM-ob-rIT"/>
+                                    <constraint firstAttribute="bottom" secondItem="qjL-JD-Ga3" secondAttribute="bottom" id="tMO-a9-VS0"/>
+                                    <constraint firstItem="S8K-bW-jMd" firstAttribute="top" secondItem="r1O-9J-QT2" secondAttribute="top" id="tah-g2-va7"/>
+                                    <constraint firstAttribute="trailing" secondItem="qjL-JD-Ga3" secondAttribute="trailing" id="zUR-DF-W8A"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="imageView" destination="S8K-bW-jMd" id="LAX-je-Q5V"/>
+                                    <outlet property="priceLabel" destination="Zo5-Mp-Pla" id="heN-27-VNU"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>
-                            <outlet property="dataSource" destination="59f-N0-98L" id="eYf-Yz-XEU"/>
                             <outlet property="delegate" destination="59f-N0-98L" id="XqA-Th-NXm"/>
                         </connections>
                     </collectionView>

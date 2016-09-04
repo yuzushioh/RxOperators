@@ -14,6 +14,6 @@ final class TimelineViewModel {
     let elements: Observable<[Timeline]>
     
     init() {
-        elements = Observable.of(Timeline.values)
+        elements = Observable.of(Timeline.values + Timeline.values)
     }
 }

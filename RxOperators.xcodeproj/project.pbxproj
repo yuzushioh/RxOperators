@@ -19,6 +19,7 @@
 		2A10B9461D7C53CD000F1178 /* TimelineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A10B9451D7C53CD000F1178 /* TimelineViewModel.swift */; };
 		2A10B94A1D7C5463000F1178 /* Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A10B9491D7C5463000F1178 /* Timeline.swift */; };
 		2A10B94D1D7C623A000F1178 /* RxCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A10B94C1D7C623A000F1178 /* RxCollectionViewController.swift */; };
+		2A10B94F1D7C63A0000F1178 /* TimelineCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A10B94E1D7C63A0000F1178 /* TimelineCollectionViewCell.swift */; };
 		2A9082F81CC7D38E0025B9CD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9082F71CC7D38E0025B9CD /* AppDelegate.swift */; };
 		2A9082FD1CC7D38E0025B9CD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A9082FB1CC7D38E0025B9CD /* Main.storyboard */; };
 		2A9082FF1CC7D38E0025B9CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A9082FE1CC7D38E0025B9CD /* Assets.xcassets */; };
@@ -85,6 +86,7 @@
 		2A10B9451D7C53CD000F1178 /* TimelineViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineViewModel.swift; sourceTree = "<group>"; };
 		2A10B9491D7C5463000F1178 /* Timeline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timeline.swift; sourceTree = "<group>"; };
 		2A10B94C1D7C623A000F1178 /* RxCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxCollectionViewController.swift; sourceTree = "<group>"; };
+		2A10B94E1D7C63A0000F1178 /* TimelineCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineCollectionViewCell.swift; sourceTree = "<group>"; };
 		2A9082F41CC7D38E0025B9CD /* RxOperators.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RxOperators.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A9082F71CC7D38E0025B9CD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2A9082FC1CC7D38E0025B9CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 			isa = PBXGroup;
 			children = (
 				2A10B9431D7C53B5000F1178 /* TimelineTableViewCell.swift */,
+				2A10B94E1D7C63A0000F1178 /* TimelineCollectionViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -391,6 +394,7 @@
 			files = (
 				2A10B94A1D7C5463000F1178 /* Timeline.swift in Sources */,
 				2A10B9421D7C5309000F1178 /* CircledImageView.swift in Sources */,
+				2A10B94F1D7C63A0000F1178 /* TimelineCollectionViewCell.swift in Sources */,
 				2A10B93D1D7B26FA000F1178 /* LocationViewController.swift in Sources */,
 				2A10B9441D7C53B5000F1178 /* TimelineTableViewCell.swift in Sources */,
 				2A9082F81CC7D38E0025B9CD /* AppDelegate.swift in Sources */,

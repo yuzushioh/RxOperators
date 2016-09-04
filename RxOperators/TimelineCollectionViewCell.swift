@@ -1,5 +1,5 @@
 //
-//  TimelineTableViewCell.swift
+//  TimelineCollectionViewCell.swift
 //  RxOperators
 //
 //  Created by 福田涼介 on 9/4/16.
@@ -8,19 +8,16 @@
 
 import UIKit
 
-class TimelineTableViewCell: UITableViewCell {
+class TimelineCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet weak var mainImageView: UIImageView!
-    @IBOutlet weak var profileImageView: UIImageView!
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var priceLabel: UILabel!
     
     var timeline: Timeline? {
         didSet {
             guard let timeline = timeline else { return }
             
-            mainImageView.image = UIImage(named: timeline.mainImage)
-            titleLabel.text = timeline.title
+            imageView.image = UIImage(named: timeline.mainImage)
             priceLabel.text = "¥\(timeline.price)⚡️"
         }
     }
@@ -28,6 +25,6 @@ class TimelineTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        mainImageView.image = nil
+        imageView.image = nil
     }
 }

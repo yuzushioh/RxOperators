@@ -28,12 +28,8 @@
 		2A9083271CCA50860025B9CD /* RxCocoa.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2A9083251CCA50860025B9CD /* RxCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2A90832A1CCA50A40025B9CD /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A9083291CCA50A40025B9CD /* RxSwift.framework */; };
 		2A90832B1CCA50A40025B9CD /* RxSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2A9083291CCA50A40025B9CD /* RxSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		2A9083441CCB46D00025B9CD /* APIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A9083431CCB46D00025B9CD /* APIKit.framework */; };
-		2A9083451CCB46D00025B9CD /* APIKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2A9083431CCB46D00025B9CD /* APIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		2A9083471CCB46DF0025B9CD /* Himotoki.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A9083461CCB46DF0025B9CD /* Himotoki.framework */; };
-		2A9083481CCB46DF0025B9CD /* Himotoki.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2A9083461CCB46DF0025B9CD /* Himotoki.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		2A90834E1CD80EC80025B9CD /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A90834D1CD80EC80025B9CD /* Result.framework */; };
-		2A90834F1CD80EC80025B9CD /* Result.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2A90834D1CD80EC80025B9CD /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		AE5AEB721DF2F65700E96BC1 /* Extension+CLLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5AEB711DF2F65700E96BC1 /* Extension+CLLocationManager.swift */; };
+		AE5AEB741DF2F6CA00E96BC1 /* RxCLLocationManagerDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5AEB731DF2F6CA00E96BC1 /* RxCLLocationManagerDelegateProxy.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -43,10 +39,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				2A9083451CCB46D00025B9CD /* APIKit.framework in Embed Frameworks */,
 				2A90832B1CCA50A40025B9CD /* RxSwift.framework in Embed Frameworks */,
-				2A90834F1CD80EC80025B9CD /* Result.framework in Embed Frameworks */,
-				2A9083481CCB46DF0025B9CD /* Himotoki.framework in Embed Frameworks */,
 				2A9083271CCA50860025B9CD /* RxCocoa.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -80,9 +73,8 @@
 		2A9083191CC7D38E0025B9CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2A9083251CCA50860025B9CD /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
 		2A9083291CCA50A40025B9CD /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
-		2A9083431CCB46D00025B9CD /* APIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = APIKit.framework; path = Carthage/Build/iOS/APIKit.framework; sourceTree = "<group>"; };
-		2A9083461CCB46DF0025B9CD /* Himotoki.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Himotoki.framework; path = Carthage/Build/iOS/Himotoki.framework; sourceTree = "<group>"; };
-		2A90834D1CD80EC80025B9CD /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
+		AE5AEB711DF2F65700E96BC1 /* Extension+CLLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension+CLLocationManager.swift"; sourceTree = "<group>"; };
+		AE5AEB731DF2F6CA00E96BC1 /* RxCLLocationManagerDelegateProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxCLLocationManagerDelegateProxy.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,10 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2A9083441CCB46D00025B9CD /* APIKit.framework in Frameworks */,
 				2A90832A1CCA50A40025B9CD /* RxSwift.framework in Frameworks */,
-				2A90834E1CD80EC80025B9CD /* Result.framework in Frameworks */,
-				2A9083471CCB46DF0025B9CD /* Himotoki.framework in Frameworks */,
 				2A9083261CCA50860025B9CD /* RxCocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -115,6 +104,8 @@
 				2A10B92F1D7B12FB000F1178 /* CircledBorderButton.swift */,
 				2A10B9411D7C5309000F1178 /* CircledImageView.swift */,
 				2A10B9331D7B1CDC000F1178 /* Alert.swift */,
+				AE5AEB711DF2F65700E96BC1 /* Extension+CLLocationManager.swift */,
+				AE5AEB731DF2F6CA00E96BC1 /* RxCLLocationManagerDelegateProxy.swift */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -214,9 +205,6 @@
 		2A90832C1CCA50D50025B9CD /* Carthage */ = {
 			isa = PBXGroup;
 			children = (
-				2A90834D1CD80EC80025B9CD /* Result.framework */,
-				2A9083431CCB46D00025B9CD /* APIKit.framework */,
-				2A9083461CCB46DF0025B9CD /* Himotoki.framework */,
 				2A9083291CCA50A40025B9CD /* RxSwift.framework */,
 				2A9083251CCA50860025B9CD /* RxCocoa.framework */,
 			);
@@ -256,7 +244,7 @@
 				TargetAttributes = {
 					2A9082F31CC7D38E0025B9CD = {
 						CreatedOnToolsVersion = 7.3;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0810;
 					};
 				};
 			};
@@ -306,6 +294,8 @@
 				2A10B93B1D7B21B5000F1178 /* LocationManager.swift in Sources */,
 				2A10B9461D7C53CD000F1178 /* TimelineViewModel.swift in Sources */,
 				2A10B92E1D7B1186000F1178 /* MainViewController.swift in Sources */,
+				AE5AEB721DF2F65700E96BC1 /* Extension+CLLocationManager.swift in Sources */,
+				AE5AEB741DF2F6CA00E96BC1 /* RxCLLocationManagerDelegateProxy.swift in Sources */,
 				2A10B9341D7B1CDC000F1178 /* Alert.swift in Sources */,
 				2A10B9321D7B14B9000F1178 /* SimpleValidationViewController.swift in Sources */,
 				2A10B94D1D7C623A000F1178 /* RxCollectionViewController.swift in Sources */,
@@ -437,7 +427,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = yuzushio.RxOperators;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -455,7 +445,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = yuzushio.RxOperators;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

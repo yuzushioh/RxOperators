@@ -1,6 +1,6 @@
 //
 //  Example.swift
-//  Example
+//  RxExample
 //
 //  Created by Krunoslav Zaher on 3/28/15.
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
@@ -11,7 +11,7 @@ import Foundation
 #if os(iOS)
     import UIKit
     typealias Image = UIImage
-#elseif os(OSX)
+#elseif os(macOS)
     import Cocoa
     import AppKit
     typealias Image = NSImage
@@ -19,26 +19,26 @@ import Foundation
 
 let MB = 1024 * 1024
 
-func exampleError(error: String, location: String = "\(#file):\(#line)") -> NSError {
+func exampleError(_ error: String, location: String = "\(#file):\(#line)") -> NSError {
     return NSError(domain: "ExampleError", code: -1, userInfo: [NSLocalizedDescriptionKey: "\(location): \(error)"])
 }
 
 extension String {
     func toFloat() -> Float? {
-        let numberFormatter = NSNumberFormatter()
-        return numberFormatter.numberFromString(self)?.floatValue
+        let numberFormatter = NumberFormatter()
+        return numberFormatter.number(from: self)?.floatValue
     }
     
     func toDouble() -> Double? {
-        let numberFormatter = NSNumberFormatter()
-        return numberFormatter.numberFromString(self)?.doubleValue
+        let numberFormatter = NumberFormatter()
+        return numberFormatter.number(from: self)?.doubleValue
     }
 }
 
-func showAlert(message: String) {
+func showAlert(_ message: String) {
     #if os(iOS)
         UIAlertView(title: "RxExample", message: message, delegate: nil, cancelButtonTitle: "OK").show()
-    #elseif os(OSX)
+    #elseif os(macOS)
         let alert = NSAlert()
         alert.messageText = message
         alert.runModal()

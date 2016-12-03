@@ -67,32 +67,32 @@ These are called marble diagrams. There are more marble diagrams at [rxmarbles.c
 
 If we were to specify sequence grammar as a regular expression it would look like:
 
-**Next* (Error | Completed)?**
+**next* (error | completed)?**
 
 This describes the following:
 
 * **Sequences can have 0 or more elements.**
-* **Once an `Error` or `Completed` event is received, the sequence cannot produce any other element.**
+* **Once an `error` or `completed` event is received, the sequence cannot produce any other element.**
 
 Sequences in Rx are described by a push interface (aka callback).
 
 ```swift
 enum Event<Element>  {
-    case Next(Element)      // next element of a sequence
-    case Error(ErrorType)   // sequence failed with error
-    case Completed          // sequence terminated successfully
+    case next(Element)      // next element of a sequence
+    case error(Swift.Error) // sequence failed with error
+    case completed          // sequence terminated successfully
 }
 
 class Observable<Element> {
-    func subscribe(observer: Observer<Element>) -> Disposable
+    func subscribe(_ observer: Observer<Element>) -> Disposable
 }
 
 protocol ObserverType {
-    func on(event: Event<Element>)
+    func on(_ event: Event<Element>)
 }
 ```
 
-**When a sequence sends the `Completed` or `Error` event all internal resources that compute sequence elements will be freed.**
+**When a sequence sends the `completed` or `error` event all internal resources that compute sequence elements will be freed.**
 
 **To cancel production of sequence elements and free resources immediately, call `dispose` on the returned subscription.**
 
@@ -102,7 +102,7 @@ If a sequence does not terminate in some way, resources will be allocated perman
 
 **Using dispose bags or `takeUntil` operator is a robust way of making sure resources are cleaned up. We recommend using them in production even if the sequences will terminate in finite time.**
 
-In case you are curious why `ErrorType` isn't generic, you can find explanation [here](DesignRationale.md#why-error-type-isnt-generic).
+In case you are curious why `Swift.Error` isn't generic, you can find explanation [here](DesignRationale.md#why-error-type-isnt-generic).
 
 ## Disposing
 
@@ -116,7 +116,7 @@ let subscription = Observable<Int>.interval(0.3, scheduler: scheduler)
         print(event)
     }
 
-NSThread.sleepForTimeInterval(2)
+NSThread.sleep(forTimeInterval: 2.0)
 
 subscription.dispose()
 
@@ -133,7 +133,7 @@ This will print:
 5
 ```
 
-Note the you usually do not want to manually call `dispose`; this is only educational example. Calling dispose manually is usually a bad code smell. There are better ways to dispose subscriptions. We can use `DisposeBag`, the `takeUntil` operator, or some other mechanism.
+Note that you usually do not want to manually call `dispose`; this is only educational example. Calling dispose manually is usually a bad code smell. There are better ways to dispose subscriptions. We can use `DisposeBag`, the `takeUntil` operator, or some other mechanism.
 
 So can this code print something after the `dispose` call executed? The answer is: it depends.
 
@@ -208,7 +208,7 @@ Additional way to automatically dispose subscription on dealloc is to use `takeU
 
 ```swift
 sequence
-    .takeUntil(self.rx_deallocated)
+    .takeUntil(self.rx.deallocated)
     .subscribe {
         print($0)
     }
@@ -218,9 +218,9 @@ sequence
 
 There is also a couple of additional guarantees that all sequence producers (`Observable`s) must honor.
 
-It doesn't matter on which thread they produce elements, but if they generate one element and send it to the observer `observer.on(.Next(nextElement))`, they can't send next element until `observer.on` method has finished execution.
+It doesn't matter on which thread they produce elements, but if they generate one element and send it to the observer `observer.on(.next(nextElement))`, they can't send next element until `observer.on` method has finished execution.
 
-Producers also cannot send terminating `.Completed` or `.Error` in case `.Next` event hasn't finished.
+Producers also cannot send terminating `.completed` or `.error` in case `.next` event hasn't finished.
 
 In short, consider this example:
 
@@ -276,9 +276,9 @@ let searchForMe = searchWikipedia("me")
 
 let cancel = searchForMe
   // sequence generation starts now, URL requests are fired
-  .subscribeNext { results in
+  .subscribe(onNext: { results in
       print(results)
-  }
+  })
 
 ```
 
@@ -291,16 +291,16 @@ Let's create a function which creates a sequence that returns one element upon s
 ```swift
 func myJust<E>(element: E) -> Observable<E> {
     return Observable.create { observer in
-        observer.on(.Next(element))
-        observer.on(.Completed)
-        return NopDisposable.instance
+        observer.on(.next(element))
+        observer.on(.completed)
+        return Disposables.create()
     }
 }
 
 myJust(0)
-    .subscribeNext { n in
+    .subscribe(onNext: { n in
       print(n)
-    }
+    })
 ```
 
 this will print:
@@ -325,11 +325,11 @@ Lets now create an observable that returns elements from an array.
 func myFrom<E>(sequence: [E]) -> Observable<E> {
     return Observable.create { observer in
         for element in sequence {
-            observer.on(.Next(element))
+            observer.on(.next(element))
         }
 
-        observer.on(.Completed)
-        return NopDisposable.instance
+        observer.on(.completed)
+        return Disposables.create()
     }
 }
 
@@ -339,17 +339,17 @@ print("Started ----")
 
 // first time
 stringCounter
-    .subscribeNext { n in
+    .subscribe(onNext: { n in
         print(n)
-    }
+    })
 
 print("----")
 
 // again
 stringCounter
-    .subscribeNext { n in
+    .subscribe(onNext: { n in
         print(n)
-    }
+    })
 
 print("Ended ----")
 ```
@@ -373,27 +373,26 @@ Ok, now something more interesting. Let's create that `interval` operator that w
 *This is equivalent of actual implementation for dispatch queue schedulers*
 
 ```swift
-func myInterval(interval: NSTimeInterval) -> Observable<Int> {
+func myInterval(_ interval: TimeInterval) -> Observable<Int> {
     return Observable.create { observer in
         print("Subscribed")
-        let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
-        let timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue)
+        let timer = DispatchSource.makeTimerSource(queue: DispatchQueue.global())
+        timer.scheduleRepeating(deadline: DispatchTime.now() + interval, interval: interval)
+
+        let cancel = Disposables.create {
+            print("Disposed")
+            timer.cancel()
+        }
 
         var next = 0
-
-        dispatch_source_set_timer(timer, 0, UInt64(interval * Double(NSEC_PER_SEC)), 0)
-        let cancel = AnonymousDisposable {
-            print("Disposed")
-            dispatch_source_cancel(timer)
-        }
-        dispatch_source_set_event_handler(timer, {
-            if cancel.disposed {
+        timer.setEventHandler {
+            if cancel.isDisposed {
                 return
             }
-            observer.on(.Next(next))
+            observer.on(.next(next))
             next += 1
-        })
-        dispatch_resume(timer)
+        }
+        timer.resume()
 
         return cancel
     }
@@ -406,11 +405,12 @@ let counter = myInterval(0.1)
 print("Started ----")
 
 let subscription = counter
-    .subscribeNext { n in
-       print(n)
-    }
+    .subscribe(onNext: { n in
+        print(n)
+    })
 
-NSThread.sleepForTimeInterval(0.5)
+
+Thread.sleep(forTimeInterval: 0.5)
 
 subscription.dispose()
 
@@ -438,19 +438,19 @@ let counter = myInterval(0.1)
 print("Started ----")
 
 let subscription1 = counter
-    .subscribeNext { n in
-       print("First \(n)")
-    }
+    .subscribe(onNext: { n in
+        print("First \(n)")
+    })
 let subscription2 = counter
-    .subscribeNext { n in
-       print("Second \(n)")
-    }
+    .subscribe(onNext: { n in
+        print("Second \(n)")
+    })
 
-NSThread.sleepForTimeInterval(0.5)
+Thread.sleep(forTimeInterval: 0.5)
 
 subscription1.dispose()
 
-NSThread.sleepForTimeInterval(0.5)
+Thread.sleep(forTimeInterval: 0.5)
 
 subscription2.dispose()
 
@@ -503,19 +503,19 @@ let counter = myInterval(0.1)
 print("Started ----")
 
 let subscription1 = counter
-    .subscribeNext { n in
-       print("First \(n)")
-    }
+    .subscribe(onNext: { n in
+        print("First \(n)")
+    })
 let subscription2 = counter
-    .subscribeNext { n in
-       print("Second \(n)")
-    }
+    .subscribe(onNext: { n in
+        print("Second \(n)")
+    })
 
-NSThread.sleepForTimeInterval(0.5)
+Thread.sleep(forTimeInterval: 0.5)
 
 subscription1.dispose()
 
-NSThread.sleepForTimeInterval(0.5)
+Thread.sleep(forTimeInterval: 0.5)
 
 subscription2.dispose()
 
@@ -554,27 +554,27 @@ Behavior for URL observables is equivalent.
 This is how HTTP requests are wrapped in Rx. It's pretty much the same pattern like the `interval` operator.
 
 ```swift
-extension NSURLSession {
-    public func rx_response(request: NSURLRequest) -> Observable<(NSData, NSURLResponse)> {
+extension Reactive where Base: URLSession {
+    public func response(_ request: NSURLRequest) -> Observable<(Data, HTTPURLResponse)> {
         return Observable.create { observer in
             let task = self.dataTaskWithRequest(request) { (data, response, error) in
-                guard let response = response, data = data else {
-                    observer.on(.Error(error ?? RxCocoaURLError.Unknown))
+                guard let response = response, let data = data else {
+                    observer.on(.error(error ?? RxCocoaURLError.Unknown))
                     return
                 }
 
-                guard let httpResponse = response as? NSHTTPURLResponse else {
-                    observer.on(.Error(RxCocoaURLError.NonHTTPResponse(response: response)))
+                guard let httpResponse = response as? HTTPURLResponse else {
+                    observer.on(.error(RxCocoaURLError.nonHTTPResponse(response: response)))
                     return
                 }
 
-                observer.on(.Next(data, httpResponse))
-                observer.on(.Completed)
+                observer.on(.next(data, httpResponse))
+                observer.on(.completed)
             }
 
             task.resume()
 
-            return AnonymousDisposable {
+            return Disposables.create {
                 task.cancel()
             }
         }
@@ -584,17 +584,15 @@ extension NSURLSession {
 
 ## Operators
 
-There are numerous operators implemented in RxSwift. The complete list can be found [here](API.md).
+There are numerous operators implemented in RxSwift.
 
 Marble diagrams for all operators can be found on [ReactiveX.io](http://reactivex.io/)
 
 Almost all operators are demonstrated in [Playgrounds](../Rx.playground).
 
-To use playgrounds please open `Rx.xcworkspace`, build `RxSwift-OSX` scheme and then open playgrounds in `Rx.xcworkspace` tree view.
+To use playgrounds please open `Rx.xcworkspace`, build `RxSwift-macOS` scheme and then open playgrounds in `Rx.xcworkspace` tree view.
 
 In case you need an operator, and don't know how to find it there a [decision tree of operators](http://reactivex.io/documentation/operators.html#tree).
-
-[Supported RxSwift operators](API.md#rxswift-supported-operators) are also grouped by function they perform, so that can also help.
 
 ### Custom operators
 
@@ -614,13 +612,13 @@ extension ObservableType {
         return Observable.create { observer in
             let subscription = self.subscribe { e in
                     switch e {
-                    case .Next(let value):
+                    case .next(let value):
                         let result = transform(value)
-                        observer.on(.Next(result))
-                    case .Error(let error):
-                        observer.on(.Error(error))
-                    case .Completed:
-                        observer.on(.Completed)
+                        observer.on(.next(result))
+                    case .error(let error):
+                        observer.on(.error(error))
+                    case .completed:
+                        observer.on(.completed)
                     }
                 }
 
@@ -637,9 +635,9 @@ let subscription = myInterval(0.1)
     .myMap { e in
         return "This is simply \(e)"
     }
-    .subscribeNext { n in
+    .subscribe(onNext: { n in
         print(n)
-    }
+    })
 ```
 
 and this will print
@@ -668,9 +666,9 @@ This isn't something that should be practiced often, and is a bad code smell, bu
   let magicBeings: Observable<MagicBeing> = summonFromMiddleEarth()
 
   magicBeings
-    .subscribeNext { being in     // exit the Rx monad  
+    .subscribe(onNext: { being in     // exit the Rx monad  
         self.doSomeStateMagic(being)
-    }
+    })
     .addDisposableTo(disposeBag)
 
   //
@@ -680,7 +678,7 @@ This isn't something that should be practiced often, and is a bad code smell, bu
     being,
     UIApplication.delegate.dataSomething.attendees
   )
-  kittens.on(.Next(kitten))   // send result back to rx
+  kittens.on(.next(kitten))   // send result back to rx
   //
   // Another mess
   //
@@ -698,9 +696,9 @@ Every time you do this, somebody will probably write this code somewhere
 
 ```swift
   kittens
-    .subscribeNext { kitten in
+    .subscribe(onNext: { kitten in
       // so something with kitten
-    }
+    })
     .addDisposableTo(disposeBag)
 ```
 
@@ -710,13 +708,13 @@ so please try not to do this.
 
 If you are unsure how exactly some of the operators work, [playgrounds](../Rx.playground) contain almost all of the operators already prepared with small examples that illustrate their behavior.
 
-**To use playgrounds please open Rx.xcworkspace, build RxSwift-OSX scheme and then open playgrounds in Rx.xcworkspace tree view.**
+**To use playgrounds please open Rx.xcworkspace, build RxSwift-macOS scheme and then open playgrounds in Rx.xcworkspace tree view.**
 
 **To view the results of the examples in the playgrounds, please open the `Assistant Editor`. You can open `Assistant Editor` by clicking on `View > Assistant Editor > Show Assistant Editor`**
 
 ## Error handling
 
-The are two error mechanisms.
+There are two error mechanisms.
 
 ### Asynchronous error handling mechanism in observables
 
@@ -783,9 +781,9 @@ let subscription = myInterval(0.1)
     .map { e in
         return "This is simply \(e)"
     }
-    .subscribeNext { n in
+    .subscribe(onNext: { n in
         print(n)
-    }
+    })
 
 NSThread.sleepForTimeInterval(0.5)
 
@@ -797,15 +795,15 @@ will print
 ```
 [my probe] subscribed
 Subscribed
-[my probe] -> Event Next(Box(0))
+[my probe] -> Event next(Box(0))
 This is simply 0
-[my probe] -> Event Next(Box(1))
+[my probe] -> Event next(Box(1))
 This is simply 1
-[my probe] -> Event Next(Box(2))
+[my probe] -> Event next(Box(2))
 This is simply 2
-[my probe] -> Event Next(Box(3))
+[my probe] -> Event next(Box(3))
 This is simply 3
-[my probe] -> Event Next(Box(4))
+[my probe] -> Event next(Box(4))
 This is simply 4
 [my probe] dispose
 Disposed
@@ -821,17 +819,17 @@ extension ObservableType {
             let subscription = self.subscribe { e in
                 print("event \(identifier)  \(e)")
                 switch e {
-                case .Next(let value):
-                    observer.on(.Next(value))
+                case .next(let value):
+                    observer.on(.next(value))
 
-                case .Error(let error):
-                    observer.on(.Error(error))
+                case .error(let error):
+                    observer.on(.error(error))
 
-                case .Completed:
-                    observer.on(.Completed)
+                case .completed:
+                    observer.on(.completed)
                 }
             }
-            return AnonymousDisposable {
+            return Disposables.create {
                    print("disposing \(identifier)")
                    subscription.dispose()
             }
@@ -842,18 +840,18 @@ extension ObservableType {
 
 ## Debugging memory leaks
 
-In debug mode Rx tracks all allocated resources in a global variable `resourceCount`.
+In debug mode Rx tracks all allocated resources in a global variable `Resources.total`.
 
-In case you want to have some resource leak detection logic, the simplest method is just printing out `RxSwift.resourceCount` periodically to output.
+In case you want to have some resource leak detection logic, the simplest method is just printing out `RxSwift.Resources.total` periodically to output.
 
 ```swift
     /* add somewhere in
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
     */
     _ = Observable<Int>.interval(1, scheduler: MainScheduler.instance)
-        .subscribeNext { _ in
-        print("Resource count \(RxSwift.resourceCount)")
-    }
+        .subscribe(onNext: { _ in
+            print("Resource count \(RxSwift.Resources.total)")
+        })
 ```
 
 Most efficient way to test for memory leaks is:
@@ -933,14 +931,14 @@ There are two built in ways this library supports KVO.
 
 ```swift
 // KVO
-extension NSObject {
-    public func rx_observe<E>(type: E.Type, _ keyPath: String, options: NSKeyValueObservingOptions, retainSelf: Bool = true) -> Observable<E?> {}
+extension Reactive where Base: NSObject {
+    public func observe<E>(type: E.Type, _ keyPath: String, options: NSKeyValueObservingOptions, retainSelf: Bool = true) -> Observable<E?> {}
 }
 
 #if !DISABLE_SWIZZLING
 // KVO
-extension NSObject {
-    public func rx_observeWeakly<E>(type: E.Type, _ keyPath: String, options: NSKeyValueObservingOptions) -> Observable<E?> {}
+extension Reactive where Base: NSObject {
+    public func observeWeakly<E>(type: E.Type, _ keyPath: String, options: NSKeyValueObservingOptions) -> Observable<E?> {}
 }
 #endif
 ```
@@ -951,25 +949,25 @@ Example how to observe frame of `UIView`.
 
 ```swift
 view
-  .rx_observe(CGRect.self, "frame")
-  .subscribeNext { frame in
+  .rx.observe(CGRect.self, "frame")
+  .subscribe(onNext: { frame in
     ...
-  }
+  })
 ```
 
 or
 
 ```swift
 view
-  .rx_observeWeakly(CGRect.self, "frame")
-  .subscribeNext { frame in
+  .rx.observeWeakly(CGRect.self, "frame")
+  .subscribe(onNext: { frame in
     ...
-  }
+  })
 ```
 
-### `rx_observe`
+### `rx.observe`
 
-`rx_observe` is more performant because it's just a simple wrapper around KVO mechanism, but it has more limited usage scenarios
+`rx.observe` is more performant because it's just a simple wrapper around KVO mechanism, but it has more limited usage scenarios
 
 * it can be used to observe paths starting from `self` or from ancestors in ownership graph (`retainSelf = false`)
 * it can be used to observe paths starting from descendants in ownership graph (`retainSelf = true`)
@@ -978,14 +976,14 @@ view
 E.g.
 
 ```swift
-self.rx_observe(CGRect.self, "view.frame", retainSelf: false)
+self.rx.observe(CGRect.self, "view.frame", retainSelf: false)
 ```
 
-### `rx_observeWeakly`
+### `rx.observeWeakly`
 
-`rx_observeWeakly` has somewhat slower than `rx_observe` because it has to handle object deallocation in case of weak references.
+`rx.observeWeakly` has somewhat slower than `rx.observe` because it has to handle object deallocation in case of weak references.
 
-It can be used in all cases where `rx_observe` can be used and additionally
+It can be used in all cases where `rx.observe` can be used and additionally
 
 * because it won't retain observed target, it can be used to observe arbitrary object graph whose ownership relation is unknown
 * it can be used to observe `weak` properties
@@ -993,7 +991,7 @@ It can be used in all cases where `rx_observe` can be used and additionally
 E.g.
 
 ```swift
-someSuspiciousViewController.rx_observeWeakly(Bool.self, "behavingOk")
+someSuspiciousViewController.rx.observeWeakly(Bool.self, "behavingOk")
 ```
 
 ### Observing structs
@@ -1004,7 +1002,7 @@ KVO is an Objective-C mechanism so it relies heavily on `NSValue`.
 
 When observing some other structures it is necessary to extract those structures from `NSValue` manually.
 
-[Here](../RxCocoa/Common/KVORepresentable+CoreGraphics.swift) are examples how to extend KVO observing mechanism and `rx_observe*` methods for other structs by implementing `KVORepresentable` protocol.
+[Here](../RxCocoa/Foundation/KVORepresentable+CoreGraphics.swift) are examples how to extend KVO observing mechanism and `rx.observe*` methods for other structs by implementing `KVORepresentable` protocol.
 
 ## UI layer tips
 
@@ -1070,18 +1068,18 @@ let request = NSURLRequest(URL: NSURL(string: "http://en.wikipedia.org/w/api.php
 If you want to just execute that request outside of composition with other observables, this is what needs to be done.
 
 ```swift
-let responseJSON = NSURLSession.sharedSession().rx_JSON(request)
+let responseJSON = NSURLSession.sharedSession().rx.JSON(request)
 
 // no requests will be performed up to this point
 // `responseJSON` is just a description how to fetch the response
 
 let cancelRequest = responseJSON
     // this will fire the request
-    .subscribeNext { json in
+    .subscribe(onNext: { json in
         print(json)
-    }
+    })
 
-NSThread.sleepForTimeInterval(3)
+NSThread.sleep(forTimeInterval: 3.0)
 
 // if you want to cancel request after 3 seconds have passed just call
 cancelRequest.dispose()
@@ -1093,7 +1091,7 @@ cancelRequest.dispose()
 In case you want a more low level access to response, you can use:
 
 ```swift
-NSURLSession.sharedSession().rx_response(myNSURLRequest)
+NSURLSession.shared.rx.response(myNSURLRequest)
     .debug("my request") // this will print out information to console
     .flatMap { (data: NSData!, response: NSURLResponse!) -> Observable<String> in
         if let response = response as? NSHTTPURLResponse {

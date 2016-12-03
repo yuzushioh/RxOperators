@@ -12,16 +12,16 @@ import RxSwift
 import Foundation
 
 public enum ReachabilityStatus {
-    case Reachable(viaWiFi: Bool)
-    case Unreachable
+    case reachable(viaWiFi: Bool)
+    case unreachable
 }
 
 extension ReachabilityStatus {
     var reachable: Bool {
         switch self {
-        case .Reachable:
+        case .reachable:
             return true
-        case .Unreachable:
+        case .unreachable:
             return false
         }
     }
@@ -29,6 +29,10 @@ extension ReachabilityStatus {
 
 protocol ReachabilityService {
     var reachability: Observable<ReachabilityStatus> { get }
+}
+
+enum ReachabilityServiceError: Error {
+    case failedToCreate
 }
 
 class DefaultReachabilityService
@@ -43,21 +47,21 @@ class DefaultReachabilityService
     let _reachability: Reachability
 
     init() throws {
-        let reachabilityRef = try Reachability.reachabilityForInternetConnection()
-        let reachabilitySubject = BehaviorSubject<ReachabilityStatus>(value: .Unreachable)
+        guard let reachabilityRef = Reachability() else { throw ReachabilityServiceError.failedToCreate }
+        let reachabilitySubject = BehaviorSubject<ReachabilityStatus>(value: .unreachable)
 
         // so main thread isn't blocked when reachability via WiFi is checked
-        let backgroundQueue = dispatch_queue_create("reachability.wificheck", DISPATCH_QUEUE_SERIAL)
+        let backgroundQueue = DispatchQueue(label: "reachability.wificheck")
 
         reachabilityRef.whenReachable = { reachability in
-            dispatch_async(backgroundQueue) {
-                reachabilitySubject.on(.Next(.Reachable(viaWiFi: reachabilityRef.isReachableViaWiFi())))
+            backgroundQueue.async {
+                reachabilitySubject.on(.next(.reachable(viaWiFi: reachabilityRef.isReachableViaWiFi)))
             }
         }
 
         reachabilityRef.whenUnreachable = { reachability in
-            dispatch_async(backgroundQueue) {
-                reachabilitySubject.on(.Next(.Unreachable))
+            backgroundQueue.async {
+                reachabilitySubject.on(.next(.unreachable))
             }
         }
 
@@ -72,7 +76,7 @@ class DefaultReachabilityService
 }
 
 extension ObservableConvertibleType {
-    func retryOnBecomesReachable(valueOnFailure:E, reachabilityService: ReachabilityService) -> Observable<E> {
+    func retryOnBecomesReachable(_ valueOnFailure:E, reachabilityService: ReachabilityService) -> Observable<E> {
         return self.asObservable()
             .catchError { (e) -> Observable<E> in
                 reachabilityService.reachability

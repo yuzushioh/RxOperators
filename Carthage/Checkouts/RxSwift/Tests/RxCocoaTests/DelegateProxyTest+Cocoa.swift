@@ -1,6 +1,6 @@
 //
 //  DelegateProxyTest+Cocoa.swift
-//  RxTests
+//  Tests
 //
 //  Created by Krunoslav Zaher on 12/5/15.
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
@@ -8,8 +8,8 @@
 
 import Foundation
 import Cocoa
-import RxCocoa
-import RxSwift
+@testable import RxCocoa
+@testable import RxSwift
 import XCTest
 
 // MARK: Protocols
@@ -43,21 +43,27 @@ class ExtendNSTextFieldDelegateProxy
 class NSTextFieldSubclass
     : NSTextField
     , TestDelegateControl {
-    override func rx_createDelegateProxy() -> RxTextFieldDelegateProxy {
+    override func createRxDelegateProxy() -> RxTextFieldDelegateProxy {
         return ExtendNSTextFieldDelegateProxy(parentObject: self)
     }
 
-    func doThatTest(value: Int) {
+    func doThatTest(_ value: Int) {
         (delegate as! NSTextFieldDelegateSubclass).testEventHappened?(value)
     }
 
-    var test: Observable<Int> {
-        return rx_delegate
-            .observe(#selector(NSTextFieldDelegateSubclass.testEventHappened(_:)))
-            .map { a in (a[0] as! NSNumber).integerValue }
+    var testSentMessage: Observable<Int> {
+        return rx.delegate
+            .sentMessage(#selector(NSTextFieldDelegateSubclass.testEventHappened(_:)))
+            .map { a in (a[0] as! NSNumber).intValue }
     }
 
-    func setMineForwardDelegate(testDelegate: TestDelegateProtocol) -> Disposable {
+    var testMethodInvoked: Observable<Int> {
+        return rx.delegate
+            .methodInvoked(#selector(NSTextFieldDelegateSubclass.testEventHappened(_:)))
+            .map { a in (a[0] as! NSNumber).intValue }
+    }
+
+    func setMineForwardDelegate(_ testDelegate: TestDelegateProtocol) -> Disposable {
         return RxTextFieldDelegateProxy.installForwardDelegate(testDelegate, retainDelegate: false, onProxyForObject: self)
     }
 }

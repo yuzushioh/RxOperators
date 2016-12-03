@@ -1,6 +1,6 @@
 //
 //  RxTest+Controls.swift
-//  Rx
+//  Tests
 //
 //  Created by Krunoslav Zaher on 3/12/16.
 //  Copyright © 2016 Krunoslav Zaher. All rights reserved.
@@ -12,9 +12,14 @@ import RxSwift
 import XCTest
 
 extension RxTest {
-    func ensurePropertyDeallocated<C, T: Equatable where C: NSObject>(createControl: () -> C, _ initialValue: T, _ propertySelector: C -> ControlProperty<T>) {
-        let variable = Variable(initialValue)
+    func ensurePropertyDeallocated<C, T: Equatable>(_ createControl: () -> C, _ initialValue: T, _ propertySelector: (C) -> ControlProperty<T>) where C: NSObject {
 
+        ensurePropertyDeallocated(createControl, initialValue, comparer: ==, propertySelector)
+    }
+
+    func ensurePropertyDeallocated<C, T>(_ createControl: () -> C, _ initialValue: T, comparer: (T, T) -> Bool, _ propertySelector: (C) -> ControlProperty<T>) where C: NSObject  {
+
+        let variable = Variable(initialValue)
 
         var completed = false
         var deallocated = false
@@ -35,9 +40,9 @@ extension RxTest {
             })
 
 
-            _ = control.rx_deallocated.subscribeNext { _ in
+            _ = (control as NSObject).rx.deallocated.subscribe(onNext: { _ in
                 deallocated = true
-            }
+            })
 
             control = nil
         }
@@ -45,7 +50,7 @@ extension RxTest {
 
         // this code is here to flush any events that were scheduled to
         // run on main loop
-        dispatch_async(dispatch_get_main_queue()) {
+        DispatchQueue.main.async {
             let runLoop = CFRunLoopGetCurrent()
             CFRunLoopStop(runLoop)
         }
@@ -55,14 +60,14 @@ extension RxTest {
 
         XCTAssertTrue(deallocated)
         XCTAssertTrue(completed)
-        XCTAssertEqual(initialValue, lastReturnedPropertyValue)
+        XCTAssertTrue(comparer(initialValue, lastReturnedPropertyValue))
     }
 
-    func ensureEventDeallocated<C, T where C: NSObject>(createControl: () -> C, _ eventSelector: C -> ControlEvent<T>) {
-        return ensureEventDeallocated({ () -> (C, Disposable) in (createControl(), NopDisposable.instance) }, eventSelector)
+    func ensureEventDeallocated<C, T>(_ createControl: @escaping () -> C, _ eventSelector: (C) -> ControlEvent<T>) where C: NSObject {
+        return ensureEventDeallocated({ () -> (C, Disposable) in (createControl(), Disposables.create()) }, eventSelector)
     }
 
-    func ensureEventDeallocated<C, T where C: NSObject>(createControl: () -> (C, Disposable), _ eventSelector: C -> ControlEvent<T>) {
+    func ensureEventDeallocated<C, T>(_ createControl: () -> (C, Disposable), _ eventSelector: (C) -> ControlEvent<T>) where C: NSObject {
         var completed = false
         var deallocated = false
         let outerDisposable = SingleAssignmentDisposable()
@@ -77,11 +82,11 @@ extension RxTest {
                 completed = true
             })
 
-            _ = control.rx_deallocated.subscribeNext { _ in
+            _ = (control as NSObject).rx.deallocated.subscribe(onNext: { _ in
                 deallocated = true
-            }
+            })
 
-            outerDisposable.disposable = disposable
+            outerDisposable.setDisposable(disposable)
         }
 
         outerDisposable.dispose()
@@ -89,7 +94,7 @@ extension RxTest {
         XCTAssertTrue(completed)
     }
 
-    func ensureControlObserverHasWeakReference<C, T where C: NSObject>(@autoclosure createControl: () -> (C), _ observerSelector: C -> AnyObserver<T>, _ observableSelector: () -> (Observable<T>)) {
+    func ensureControlObserverHasWeakReference<C, T>( _ createControl: @autoclosure() -> (C), _ observerSelector: (C) -> AnyObserver<T>, _ observableSelector: () -> (Observable<T>)) where C: NSObject {
         var deallocated = false
 
         let disposeBag = DisposeBag()
@@ -101,9 +106,9 @@ extension RxTest {
 
             observable.bindTo(propertyObserver).addDisposableTo(disposeBag)
 
-            _ = control.rx_deallocated.subscribeNext { _ in
+            _ = (control as NSObject).rx.deallocated.subscribe(onNext: { _ in
                 deallocated = true
-            }
+            })
         }
 
         XCTAssertTrue(deallocated)

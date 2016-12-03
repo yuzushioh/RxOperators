@@ -16,15 +16,15 @@ class LocationViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var locationLabel: UILabel!
     
-    private let disposeBag = DisposeBag()
+    fileprivate let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         LocationManager.instance.authorized
-            .subscribeNext { authorized in
+            .subscribe(onNext: { authorized in
                 print(authorized)
-            }
+            })
             .addDisposableTo(disposeBag)
         
         LocationManager.instance.location
@@ -36,9 +36,9 @@ class LocationViewController: UIViewController {
             .addDisposableTo(disposeBag)
         
         LocationManager.instance.error
-            .subscribeNext { [weak self] error in
+            .subscribe(onNext: { [weak self] error in
                 Alert.showAlert("Error", message: error.description, baseViewController: self)
-            }
+            })
             .addDisposableTo(disposeBag)
     }
 }

@@ -18,19 +18,19 @@ class SimpleValidationViewController: UITableViewController {
     @IBOutlet weak var doneButton: UIButton!
     
     enum ValidationType {
-        case Single
-        case Double
+        case single
+        case double
     }
     
     enum MaxWordCount {
-        case First
-        case Second
+        case first
+        case second
         
         var maxCount: Int {
             switch self {
-            case .First:
+            case .first:
                 return 5
-            case .Second:
+            case .second:
                 return 8
             }
         }
@@ -43,8 +43,8 @@ class SimpleValidationViewController: UITableViewController {
         
         title = "\(validationType)"
         
-        let isSingleValidation = validationType == .Single
-        secondRowCell.hidden = isSingleValidation
+        let isSingleValidation = validationType == .single
+        secondRowCell.isHidden = isSingleValidation
         
         if isSingleValidation {
             bindSingleValidation()
@@ -55,42 +55,42 @@ class SimpleValidationViewController: UITableViewController {
         bindButton()
     }
     
-    private let disposeBag = DisposeBag()
+    fileprivate let disposeBag = DisposeBag()
     
-    private func bindButton() {
-        doneButton.rx_tap
-            .subscribeNext { [weak self] _ in
+    fileprivate func bindButton() {
+        doneButton.rx.tap
+            .subscribe(onNext: { [weak self] _ in
                 Alert.showAlert("", message: "rx_tap!!", baseViewController: self)
-            }
+            })
             .addDisposableTo(disposeBag)
     }
     
-    private func bindSingleValidation() {
-        firstTextField.rx_text
+    fileprivate func bindSingleValidation() {
+        firstTextField.rx.text.orEmpty
             .map { text -> Bool in
                 let count = text.characters.count
-                return count > 0 && count <= MaxWordCount.First.maxCount
+                return count > 0 && count <= MaxWordCount.first.maxCount
             }
-            .bindTo(doneButton.rx_enabled)
+            .bindTo(doneButton.rx.isEnabled)
             .addDisposableTo(disposeBag)
     }
     
-    private func bindDoubleValidation() {
-        let isFirstTextFieldValid = firstTextField.rx_text
+    fileprivate func bindDoubleValidation() {
+        let isFirstTextFieldValid = firstTextField.rx.text.orEmpty
             .map { text -> Bool in
                 let count = text.characters.count
-                return count > 0 && count <= MaxWordCount.First.maxCount
+                return count > 0 && count <= MaxWordCount.first.maxCount
         }
         
-        let isSecondTextFieldValid = secondTextField.rx_text
+        let isSecondTextFieldValid = secondTextField.rx.text.orEmpty
             .map { text -> Bool in
                 let count = text.characters.count
-                return count > 0 && count <= MaxWordCount.Second.maxCount
+                return count > 0 && count <= MaxWordCount.second.maxCount
         }
         
         Observable
             .combineLatest(isFirstTextFieldValid, isSecondTextFieldValid) { $0 && $1 }
-            .bindTo(doneButton.rx_enabled)
+            .bindTo(doneButton.rx.isEnabled)
             .addDisposableTo(disposeBag)
     }
 }

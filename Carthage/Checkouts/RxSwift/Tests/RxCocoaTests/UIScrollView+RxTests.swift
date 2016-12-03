@@ -1,6 +1,6 @@
 //
 //  UIScrollView+RxTests.swift
-//  Rx
+//  Tests
 //
 //  Created by Suyeol Jeon on 6/8/16.
 //  Copyright © 2016 Krunoslav Zaher. All rights reserved.
@@ -22,16 +22,16 @@ extension UIScrollViewTests {
 
     func testScrollEnabled_False() {
         let scrollView = UIScrollView(frame: CGRect.zero)
-        scrollView.scrollEnabled = true
-        Observable.just(false).bindTo(scrollView.rx_scrollEnabled).dispose()
-        XCTAssertTrue(scrollView.scrollEnabled == false)
+        scrollView.isScrollEnabled = true
+        Observable.just(false).bindTo(scrollView.rx.isScrollEnabled).dispose()
+        XCTAssertTrue(scrollView.isScrollEnabled == false)
     }
 
     func testScrollEnabled_True() {
         let scrollView = UIScrollView(frame: CGRect.zero)
-        scrollView.scrollEnabled = false
-        Observable.just(true).bindTo(scrollView.rx_scrollEnabled).dispose()
-        XCTAssertTrue(scrollView.scrollEnabled == true)
+        scrollView.isScrollEnabled = false
+        Observable.just(true).bindTo(scrollView.rx.isScrollEnabled).dispose()
+        XCTAssertTrue(scrollView.isScrollEnabled == true)
     }
 
 }
@@ -50,11 +50,11 @@ extension UIScrollViewTests {
         let scrollView = UIScrollView(frame: CGRect.zero)
         autoreleasepool {
             let delegate = MockScrollViewDelegate()
-            _ = scrollView.rx_setDelegate(delegate)
+            _ = scrollView.rx.setDelegate(delegate)
 
-            _ = delegate.rx_deallocated.subscribeNext { _ in
+            _ = delegate.rx.deallocated.subscribe(onNext: { _ in
                 delegateDeallocated = true
-            }
+            })
 
             XCTAssert(delegateDeallocated == false)
         }

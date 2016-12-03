@@ -9,17 +9,17 @@
 import UIKit
 
 final class Alert {
-    static func showAlert(title: String?, message: String? = nil, completionHandler: (Void -> Void)? = nil, baseViewController: UIViewController?) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+    static func showAlert(_ title: String?, message: String? = nil, completionHandler: ((Void) -> Void)? = nil, baseViewController: UIViewController?) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alertController.addAction(
             UIAlertAction(
                 title: "OK",
-                style: .Default,
+                style: .default,
                 handler: { action in
                     completionHandler?()
             })
         )
         
-        baseViewController?.presentViewController(alertController, animated: true, completion: nil)
+        baseViewController?.present(alertController, animated: true, completion: nil)
     }
 }

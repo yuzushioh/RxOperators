@@ -1,7 +1,7 @@
 /*:
  > # IMPORTANT: To use **Rx.playground**:
  1. Open **Rx.xcworkspace**.
- 1. Build the **RxSwift-OSX** scheme (**Product** → **Build**).
+ 1. Build the **RxSwift-macOS** scheme (**Product** → **Build**).
  1. Open **Rx** playground in the **Project navigator**.
  1. Show the Debug Area (**View** → **Debug Area** → **Show Debug Area**).
  ----
@@ -29,7 +29,7 @@ example("catchErrorJustReturn") {
     sequenceThatFails.onNext("😨")
     sequenceThatFails.onNext("😡")
     sequenceThatFails.onNext("🔴")
-    sequenceThatFails.onError(Error.Test)
+    sequenceThatFails.onError(TestError.test)
 }
 /*:
  ----
@@ -55,7 +55,7 @@ example("catchError") {
     sequenceThatFails.onNext("😨")
     sequenceThatFails.onNext("😡")
     sequenceThatFails.onNext("🔴")
-    sequenceThatFails.onError(Error.Test)
+    sequenceThatFails.onError(TestError.test)
     
     recoverySequence.onNext("😊")
 }
@@ -75,7 +75,7 @@ example("retry") {
         observer.onNext("🍊")
         
         if count == 1 {
-            observer.onError(Error.Test)
+            observer.onError(TestError.test)
             print("Error encountered")
             count += 1
         }
@@ -85,12 +85,12 @@ example("retry") {
         observer.onNext("🐭")
         observer.onCompleted()
         
-        return NopDisposable.instance
+        return Disposables.create()
     }
     
     sequenceThatErrors
         .retry()
-        .subscribeNext { print($0) }
+        .subscribe(onNext: { print($0) })
         .addDisposableTo(disposeBag)
 }
 /*:
@@ -109,7 +109,7 @@ example("retry maxAttemptCount") {
         observer.onNext("🍊")
         
         if count < 5 {
-            observer.onError(Error.Test)
+            observer.onError(TestError.test)
             print("Error encountered")
             count += 1
         }
@@ -119,12 +119,12 @@ example("retry maxAttemptCount") {
         observer.onNext("🐭")
         observer.onCompleted()
         
-        return NopDisposable.instance
+        return Disposables.create()
     }
     
     sequenceThatErrors
         .retry(3)
-        .subscribeNext { print($0) }
+        .subscribe(onNext: { print($0) })
         .addDisposableTo(disposeBag)
 }
 

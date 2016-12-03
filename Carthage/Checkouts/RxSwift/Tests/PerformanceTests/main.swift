@@ -1,6 +1,6 @@
 //
 //  main.swift
-//  Benchmark
+//  Tests
 //
 //  Created by Krunoslav Zaher on 9/26/15.
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
@@ -8,7 +8,9 @@
 
 import Foundation
 import RxSwift
+#if !SWIFT_PACKAGE
 import RxCocoa
+#endif
 import AppKit
 import CoreLocation
 
@@ -25,12 +27,12 @@ compareTwoImplementations(benchmarkTime: true, benchmarkMemory: false, first: {
     //let a = Observable.just(1)
 
     //combineLatest(a,
-        publishSubject //.asDriver(onErrorJustReturn: -1)
+        _ = publishSubject //.asDriver(onErrorJustReturn: -1)
     /*create { (o: AnyObserver<Int>) in
             for i in 0..<100 {
-                o.on(.Next(i))
+                o.on(.next(i))
             }
-            return NopDisposable.instance
+            return Disposables.create()
         }*/
         //.retryWhen { $0 }
         .shareReplay(1)
@@ -49,13 +51,13 @@ compareTwoImplementations(benchmarkTime: true, benchmarkMemory: false, first: {
         /*.filter { _ in true }//){ x, _ in x }
         .map { $0 }
         .flatMap { Observable.just($0) }*/
-        .subscribeNext { _ in
+        .subscribe(onNext: { _ in
 
-        }
+        })
 
 
     for i in 0..<100 {
-        publishSubject.on(.Next(i))
+        publishSubject.on(.next(i))
     }
 
 }, second: {

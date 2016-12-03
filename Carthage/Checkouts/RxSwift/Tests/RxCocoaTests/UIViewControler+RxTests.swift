@@ -1,6 +1,6 @@
 //
 //  UIViewControler+RxTests.swift
-//  Rx
+//  Tests
 //
 //  Created by Kyle Fuller on 30/05/2016.
 //  Copyright © 2016 Krunoslav Zaher. All rights reserved.
@@ -17,7 +17,7 @@ class UITViewControllerTests : RxTest {
   func testRxTitle() {
     let viewController = UIViewController()
 
-    _ = Observable.just("title").bindTo(viewController.rx_title)
+    _ = Observable.just("title").bindTo(viewController.rx.title)
 
     XCTAssertEqual("title", viewController.title)
   }

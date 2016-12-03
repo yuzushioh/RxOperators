@@ -13,14 +13,14 @@ import CoreLocation
 final class LocationManager {
     static let instance = LocationManager()
     
-    private let locationManager = CLLocationManager()
+    fileprivate let locationManager = CLLocationManager()
     
-    private let authorizationStatus: Observable<CLAuthorizationStatus>
+    fileprivate let authorizationStatus: Observable<CLAuthorizationStatus>
     let authorized: Observable<Bool>
     let location: Observable<CLLocationCoordinate2D>
     let error: Observable<NSError>
     
-    private init() {
+    fileprivate init() {
         locationManager.distanceFilter = kCLDistanceFilterNone
         locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
         
@@ -32,7 +32,7 @@ final class LocationManager {
                 }
                 
                 return locationManager
-                    .rx_didChangeAuthorizationStatus
+                    .rx.didChangeAuthorizationStatus
                     .startWith(status)
             }
             .distinctUntilChanged()
@@ -40,7 +40,7 @@ final class LocationManager {
         authorized = authorizationStatus
             .map { status in
                 switch status {
-                case .AuthorizedAlways, .AuthorizedWhenInUse:
+                case .authorizedAlways, .authorizedWhenInUse:
                     return true
                 default:
                     return false
@@ -49,15 +49,15 @@ final class LocationManager {
             .distinctUntilChanged()
         
         location = Observable
-            .combineLatest(authorized, locationManager.rx_didUpdateLocations) { $0 }
+            .combineLatest(authorized, locationManager.rx.didUpdateLocations) { $0 }
             .flatMap { authorized, locations -> Observable<CLLocationCoordinate2D> in
-                guard let location = locations.last where authorized else {
+                guard let location = locations.last, authorized else {
                     return Observable.empty()
                 }
                 return Observable.of(location.coordinate)
             }
         
-        error = locationManager.rx_didFailWithError
+        error = locationManager.rx.didFailWithError
         
         locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation()

@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:Rx.playground">
+   </FileRef>
+   <FileRef
       location = "group:Package.swift">
    </FileRef>
    <FileRef
@@ -9,9 +12,6 @@
    </FileRef>
    <FileRef
       location = "group:README.md">
-   </FileRef>
-   <FileRef
-      location = "group:ISSUE_TEMPLATE.md">
    </FileRef>
    <FileRef
       location = "group:CHANGELOG.md">
@@ -29,42 +29,20 @@
          location = "group:RxSwift.podspec">
       </FileRef>
       <FileRef
-         location = "group:RxTests.podspec">
+         location = "group:RxTest.podspec">
       </FileRef>
    </Group>
    <Group
       location = "group:scripts"
       name = "scripts">
-      <Group
-         location = "group:automation-tests"
-         name = "automation-tests">
-         <FileRef
-            location = "group:01_githubSignUp.js">
-         </FileRef>
-         <FileRef
-            location = "group:02_searchWikipedia.js">
-         </FileRef>
-         <FileRef
-            location = "group:03_masterDetail.js">
-         </FileRef>
-         <FileRef
-            location = "group:04_controlsTests.js">
-         </FileRef>
-         <FileRef
-            location = "group:05_reactivePartialUpdates.js">
-         </FileRef>
-         <FileRef
-            location = "group:common.js">
-         </FileRef>
-         <FileRef
-            location = "group:main.js">
-         </FileRef>
-      </Group>
       <FileRef
-         location = "group:all-tests.sh">
+         location = "group:update-jazzy-config.rb">
       </FileRef>
       <FileRef
-         location = "group:automation-tests.sh">
+         location = "group:update-jazzy-docs.sh">
+      </FileRef>
+      <FileRef
+         location = "group:all-tests.sh">
       </FileRef>
       <FileRef
          location = "group:common.sh">
@@ -91,9 +69,6 @@
    <Group
       location = "group:Documentation"
       name = "Documentation">
-      <FileRef
-         location = "group:API.md">
-      </FileRef>
       <FileRef
          location = "group:DesignRationale.md">
       </FileRef>
@@ -128,9 +103,6 @@
          location = "group:Warnings.md">
       </FileRef>
    </Group>
-   <FileRef
-      location = "group:Rx.playground">
-   </FileRef>
    <FileRef
       location = "group:Rx.xcodeproj">
    </FileRef>

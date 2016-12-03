@@ -14,8 +14,8 @@ class RxTableViewController: UITableViewController {
     
     @IBOutlet weak var totalCountLabel: UILabel!
     
-    private let viewModel = TimelineViewModel()
-    private let disposeBag = DisposeBag()
+    fileprivate let viewModel = TimelineViewModel()
+    fileprivate let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,28 +24,28 @@ class RxTableViewController: UITableViewController {
         bindTableView()
     }
     
-    private func bindUI() {
+    fileprivate func bindUI() {
         viewModel.elements
             .map { "Explore \($0.count) homes" }
-            .bindTo(totalCountLabel.rx_text)
+            .bindTo(totalCountLabel.rx.text)
             .addDisposableTo(disposeBag)
     }
     
-    private func bindTableView() {
+    fileprivate func bindTableView() {
         viewModel.elements
-            .bindTo(tableView.rx_itemsWithCellIdentifier("Cell", cellType: TimelineTableViewCell.self)) { index, timeline, cell in
+            .bindTo(tableView.rx.items(cellIdentifier: "Cell", cellType: TimelineTableViewCell.self)) { index, timeline, cell in
                 cell.timeline = timeline
             }
             .addDisposableTo(disposeBag)
         
-        tableView.rx_modelSelected(Timeline)
-            .subscribeNext { [weak self] timeline in
+        tableView.rx.modelSelected(Timeline.self)
+            .subscribe(onNext: { [weak self] timeline in
                 Alert.showAlert("Selected House", message: timeline.title, baseViewController: self)
-            }
+            })
             .addDisposableTo(disposeBag)
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 200
     }
 }

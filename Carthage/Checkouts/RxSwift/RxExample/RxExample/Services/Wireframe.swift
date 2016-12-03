@@ -1,6 +1,6 @@
 //
 //  Wireframe.swift
-//  Example
+//  RxExample
 //
 //  Created by Krunoslav Zaher on 4/3/15.
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
@@ -13,69 +13,69 @@ import RxSwift
 
 #if os(iOS)
 import UIKit
-#elseif os(OSX)
+#elseif os(macOS)
 import Cocoa
 #endif
 
 enum RetryResult {
-    case Retry
-    case Cancel
+    case retry
+    case cancel
 }
 
 protocol Wireframe {
-    func openURL(URL: NSURL)
-    func promptFor<Action: CustomStringConvertible>(message: String, cancelAction: Action, actions: [Action]) -> Observable<Action>
+    func open(url: URL)
+    func promptFor<Action: CustomStringConvertible>(_ message: String, cancelAction: Action, actions: [Action]) -> Observable<Action>
 }
 
 
 class DefaultWireframe: Wireframe {
     static let sharedInstance = DefaultWireframe()
 
-    func openURL(URL: NSURL) {
+    func open(url: URL) {
         #if os(iOS)
-            UIApplication.sharedApplication().openURL(URL)
-        #elseif os(OSX)
-            NSWorkspace.sharedWorkspace().openURL(URL)
+            UIApplication.shared.openURL(url)
+        #elseif os(macOS)
+            NSWorkspace.shared().open(url)
         #endif
     }
 
     #if os(iOS)
     private static func rootViewController() -> UIViewController {
         // cheating, I know
-        return UIApplication.sharedApplication().keyWindow!.rootViewController!
+        return UIApplication.shared.keyWindow!.rootViewController!
     }
     #endif
 
-    static func presentAlert(message: String) {
+    static func presentAlert(_ message: String) {
         #if os(iOS)
-            let alertView = UIAlertController(title: "RxExample", message: message, preferredStyle: .Alert)
-            alertView.addAction(UIAlertAction(title: "OK", style: .Cancel) { _ in
+            let alertView = UIAlertController(title: "RxExample", message: message, preferredStyle: .alert)
+            alertView.addAction(UIAlertAction(title: "OK", style: .cancel) { _ in
             })
-            rootViewController().presentViewController(alertView, animated: true, completion: nil)
+            rootViewController().present(alertView, animated: true, completion: nil)
         #endif
     }
 
-    func promptFor<Action : CustomStringConvertible>(message: String, cancelAction: Action, actions: [Action]) -> Observable<Action> {
+    func promptFor<Action : CustomStringConvertible>(_ message: String, cancelAction: Action, actions: [Action]) -> Observable<Action> {
         #if os(iOS)
         return Observable.create { observer in
-            let alertView = UIAlertController(title: "RxExample", message: message, preferredStyle: .Alert)
-            alertView.addAction(UIAlertAction(title: cancelAction.description, style: .Cancel) { _ in
-                observer.on(.Next(cancelAction))
+            let alertView = UIAlertController(title: "RxExample", message: message, preferredStyle: .alert)
+            alertView.addAction(UIAlertAction(title: cancelAction.description, style: .cancel) { _ in
+                observer.on(.next(cancelAction))
             })
 
             for action in actions {
-                alertView.addAction(UIAlertAction(title: action.description, style: .Default) { _ in
-                    observer.on(.Next(action))
+                alertView.addAction(UIAlertAction(title: action.description, style: .default) { _ in
+                    observer.on(.next(action))
                 })
             }
 
-            DefaultWireframe.rootViewController().presentViewController(alertView, animated: true, completion: nil)
+            DefaultWireframe.rootViewController().present(alertView, animated: true, completion: nil)
 
-            return AnonymousDisposable {
-                alertView.dismissViewControllerAnimated(false, completion: nil)
+            return Disposables.create {
+                alertView.dismiss(animated:false, completion: nil)
             }
         }
-        #elseif os(OSX)
+        #elseif os(macOS)
             return Observable.error(NSError(domain: "Unimplemented", code: -1, userInfo: nil))
         #endif
     }
@@ -85,9 +85,9 @@ class DefaultWireframe: Wireframe {
 extension RetryResult : CustomStringConvertible {
     var description: String {
         switch self {
-        case .Retry:
+        case .retry:
             return "Retry"
-        case .Cancel:
+        case .cancel:
             return "Cancel"
         }
     }
